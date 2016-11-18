@@ -135,9 +135,6 @@
               <referencedTypeMoniker Id="d11aa4cc-9c3a-4071-adb6-817919700aa7" LastKnownName="bool" />
             </type_NamedElement>
           </property>
-          <property Id="1a350c3d-dd7a-4744-9605-76f0e03628a5" name="Attribute1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="f1a5947d-6810-4c2c-9417-ea4eef6918ef" />
-          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation Id="d0858be1-be97-4044-8cf1-25930c66ef2f" name="AddGuest" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">

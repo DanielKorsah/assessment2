@@ -23,7 +23,6 @@ namespace Coursework_2
         public MainWindow()
         {
             InitializeComponent();
-            newButton.Content = "new &#xa Customer";
            
         }
 

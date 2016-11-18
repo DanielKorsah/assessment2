@@ -350,16 +350,6 @@
                 LastKnownLocation="Coursework Modeling Project.uml" />
             </type_NamedElement>
           </property>
-          <property
-            Id="f1a5947d-6810-4c2c-9417-ea4eef6918ef"
-            name="Attribute1"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false" />
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
