@@ -24,7 +24,7 @@ namespace Coursework_2
         {
             InitializeComponent();
 
-            //decide whether or not to use a list of objects or not
+           
         }
         
     }
