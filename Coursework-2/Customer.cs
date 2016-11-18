@@ -8,5 +8,6 @@ namespace Coursework_2
 {
     class Customer
     {
+        //contains inforamtion for each customer
     }
 }

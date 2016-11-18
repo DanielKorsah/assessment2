@@ -8,5 +8,6 @@ namespace Coursework_2
 {
     class Booking
     {
+        //handles each booking
     }
 }
