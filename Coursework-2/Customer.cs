@@ -23,7 +23,7 @@ namespace Coursework_2
 
         public string Address //address accessor - does the same as above but for address
         {
-            get { return address; }
+            get { return address; } 
             set { address = value; }
         }
 

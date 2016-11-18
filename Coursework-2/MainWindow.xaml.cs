@@ -28,12 +28,13 @@ namespace Coursework_2
 
         private void newButton_Click(object sender, RoutedEventArgs e) //execute when New Customer button is clicked on GUI
         {
+            bool newUser = true; //tell next form that the user is new
 
         }
 
         private void returningButton_Click(object sender, RoutedEventArgs e) //execute when Returning Customer button is clicked on GUI
         {
-
+            bool newUser = false; //tell the next form that the user is returning
         }
     }
 }
