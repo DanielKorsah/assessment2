@@ -32,9 +32,6 @@ namespace Coursework_2
             get { return customerRef; }
             set { customerRef = value; }
         }
-
-
-
-
+        
     }
 }

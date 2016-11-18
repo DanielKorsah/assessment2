@@ -23,6 +23,9 @@ namespace Coursework_2
         public MainWindow()
         {
             InitializeComponent();
+
+            //decide whether or not to use a list of objects or not
         }
+        
     }
 }
