@@ -8,5 +8,7 @@ namespace Coursework_2
 {
     class Guest
     {
+        //Handle each guest
+        //4 guests can be listed per booking
     }
 }
