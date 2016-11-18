@@ -19,8 +19,10 @@ namespace Coursework_2
         //</basic package variables>
 
         //<optional extras>
-
+        private bool breakfast;
+        private bool meals; 
+        private string diet; //the dietary requit=rement associated with breakfast and/or evening meals - must be present if meals or breakfast are requested
+        private bool carHire;
         //</optional extras>
-    
     }
 }
