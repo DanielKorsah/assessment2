@@ -49,6 +49,31 @@ namespace Coursework_2
             get { return guestList; }
         }
 
+        public bool Breakfast //accessor to assing or retrieve unique id number for the booking
+        {
+            get { return breakfast; }
+            set { breakfast = value; }
+        }
+
+        public bool Meals //accessor for meals boolean
+        {
+            get { return meals; }
+            set { meals = value; }
+        }
+        
+        public string Diet //accessor for string holding dietary requirements
+        {
+            get { return diet; }
+            set { diet = value; }
+        }
+
+        public bool CarHire //accessor for carHire boolean
+        {
+            get { return carHire; }
+            set { carHire = value; }
+        }
+
+
         //add guest objects to a list up to a maximum of 4
         public void AddToList(Guest guest)
         {
