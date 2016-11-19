@@ -48,7 +48,19 @@ namespace Coursework_2
         {
             get { return guestList; }
         }
-        
 
+        //add guest objects to a list up to a maximum of 4
+        public void AddToList(Guest guest)
+        {
+            if (guestList.Count < 4) //execute if there are less than 4 guests on this booking
+            {
+                guestList.Add(guest);
+            }
+            else //error, only 4 or less allowed
+            {
+                MessageBox.Show("Max number of guests reached.", "No more guests.", //show reason for error
+                    MessageBoxButton.OK, MessageBoxImage.Error); //give error box an OK button and have properties of an error- i.e. bonk noise and red X
+            }
+        }
     }
 }
