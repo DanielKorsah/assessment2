@@ -16,13 +16,13 @@ namespace Coursework_2
         private DateTime arrivalDate;                        //delcare the variable used to store the date the booking starts
         private DateTime departureDate;                      //the date the booking ends
         private int bookingRef;                              //uniquie number associated with only this booking
-        private List<Guest> guestList = new List<Guest> { };    //empty list to which guests will be added if added
+        private List<Guest> guestList = new List<Guest> { }; //empty list to which guests will be added if added
         //</basic package variables>
 
         //<optional extras>
         private bool breakfast;
         private bool meals;
-        private string diet;                                 //the dietary requit=rement associated with breakfast and/or evening meals - must be present if meals or breakfast are requested
+        private string diet;                                 //the dietary requirements associated with breakfast and/or evening meals - must be present if meals or breakfast are requested
         private bool carHire;
         //</optional extras>
 
