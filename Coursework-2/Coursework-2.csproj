@@ -62,6 +62,7 @@
     <Compile Include="SignOn.xaml.cs">
       <DependentUpon>SignOn.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserTacker.cs" />
     <Page Include="CreateBooking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

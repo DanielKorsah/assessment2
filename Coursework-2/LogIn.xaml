@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Coursework_2"
         mc:Ignorable="d"
-        Title="LogIn" Height="498.8" Width="700">
+        Title="LogIn" Height="335.3" Width="355">
     <Grid>
-        
+
     </Grid>
 </Window>

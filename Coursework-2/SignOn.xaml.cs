@@ -36,6 +36,7 @@ namespace Coursework_2
             //</take strings from UI>
 
             Customer currentCustomer = new Customer(name1, name2, address1, address2, city, postCode); //pass Customer details to Customer constructor
+            UserTracker
 
             CreateBooking createBooking = new CreateBooking(currentCustomer);
             createBooking.Show();
