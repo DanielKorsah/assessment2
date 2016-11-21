@@ -7,18 +7,19 @@
         mc:Ignorable="d"
         Title="SignOn" Height="316" Width="538">
     <Grid>
-        <Button Content="Add User" HorizontalAlignment="Left" Margin="371,236,0,0" VerticalAlignment="Top" Width="120" FontSize="16"/>
+        <Button Content="Add User" HorizontalAlignment="Left" Margin="371,236,0,0" VerticalAlignment="Top" Width="120" FontSize="16" Click="Button_Click"/>
         <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="22" Margin="226,40,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="16"/>
-        <TextBox x:Name="address1" HorizontalAlignment="Left" Height="22" Margin="226,81,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="16" TextChanged="textBox2_TextChanged"/>
-        <Label x:Name="label" Content="Name" HorizontalAlignment="Left" Margin="39,36,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label x:Name="label1" Content="Address line 1" HorizontalAlignment="Left" Margin="39,77,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="addressBox1" HorizontalAlignment="Left" Height="22" Margin="226,81,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="16" TextChanged="textBox2_TextChanged"/>
+        <Label x:Name="label" Content="Names *" HorizontalAlignment="Left" Margin="39,36,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="label1" Content="Address line 1 *" HorizontalAlignment="Left" Margin="39,77,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label Content="Address line 2" HorizontalAlignment="Left" Margin="39,108,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.532,-0.226"/>
-        <TextBox x:Name="address2" HorizontalAlignment="Left" Height="23" Margin="226,112,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="16"/>
-        <Label x:Name="label2" Content="City" HorizontalAlignment="Left" Margin="39,139,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.649,0.774"/>
-        <TextBox x:Name="address3" HorizontalAlignment="Left" Height="23" Margin="226,143,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="16"/>
-        <Label x:Name="label3" Content="Post Code" HorizontalAlignment="Left" Margin="39,170,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox x:Name="address4" HorizontalAlignment="Left" Height="23" Margin="226,174,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="16" RenderTransformOrigin="0.05,0.522"/>
+        <TextBox x:Name="addressBox2" HorizontalAlignment="Left" Height="23" Margin="226,112,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="16"/>
+        <Label x:Name="label2" Content="City *" HorizontalAlignment="Left" Margin="39,139,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.649,0.774"/>
+        <TextBox x:Name="addressBox3" HorizontalAlignment="Left" Height="23" Margin="226,143,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="16"/>
+        <Label x:Name="label3" Content="Post Code *" HorizontalAlignment="Left" Margin="39,170,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="addressBox4" HorizontalAlignment="Left" Height="23" Margin="226,174,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="16" RenderTransformOrigin="0.05,0.522"/>
         <TextBox x:Name="nameBox2" HorizontalAlignment="Left" Height="23" Margin="371,40,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="16"/>
+        <Label x:Name="label4" Content="Fields marked with an astersitk (*) are compulsory." HorizontalAlignment="Left" Margin="39,237,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

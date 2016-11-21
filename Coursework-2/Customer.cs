@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Coursework_2
 {
-    class Customer
+    public class Customer
     {
         //contains inforamtion for each customer
         //one customer can have many bookings
@@ -31,6 +31,12 @@ namespace Coursework_2
         {
             get { return customerRef; }
             set { customerRef = value; }
+        }
+
+        public Customer(string name1, string name2, string address1, string address2, string city, string postCode) //read arguments from window to construct Customer
+        {
+            name = name1 + " " + name2; //Make name a single string
+            address = address1 + ", " + address2 + ", " + city + ", " + postCode; //construct a singe line address from constituant parts
         }
         
     }
