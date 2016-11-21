@@ -29,7 +29,8 @@ namespace Coursework_2
         private void newButton_Click(object sender, RoutedEventArgs e) //open sign on paghe when New Customer button is clicked on GUI
         {
             SignOn signOnPage = new SignOn(); 
-            signOnPage.Show(); 
+            signOnPage.Show();
+            this.Close();
         }
 
         private void returningButton_Click(object sender, RoutedEventArgs e) //open log in page when Returning Customer button is clicked on GUI
