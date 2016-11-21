@@ -23,5 +23,15 @@ namespace Coursework_2
         {
             InitializeComponent();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            string checkNum = custRefBox.Text.Trim(); //checknum = user's input. .Trim() added to remove line feed characters
+            Customer currentCustomer = new Customer(); 
+            UserTracker tracker = UserTracker.Instance; //singleton instance of UserTracker
+
+            tracker.CheckCustId(checkNum, currentCustomer); 
+
+        }
     }
 }

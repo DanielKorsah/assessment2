@@ -8,9 +8,9 @@ using System.Windows;
 
 namespace Coursework_2
 {
-    class DirectoryManager
+    public class DirectoryManager //class to choose the correct file path or return null if none available are valid
     {
-        private string path;
+        private string path; //string storing the path to a persistence folder where all persistent files will be stored
 
 
         //<validate file path>
@@ -23,15 +23,15 @@ namespace Coursework_2
             }
             else if (Directory.Exists(@"F:\") && !Directory.Exists(@"G:\")) //set to F drive for USB in JKCC
             {
-                path = @"F:\Persistence\Customers.txt";
+                path = @"F:\Persistence\";
             }
             else if (Directory.Exists(@"G:\")) //drive G for USB drive at home
             {
-                path = @"G:\persistence\Customers.txt";
+                path = @"G:\Persistence\";
             }
             else if (!Directory.Exists(@"D:\") && !Directory.Exists(@"F:\") && !Directory.Exists(@"G:\"))//if no USB at merchiston use H drive
             {
-                path = @"H:\Customers.txt";
+                path = @"H:\Persistence";
             }
             else //Where are you even trying to run this?
             {

@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace Coursework_2
 {
-    class Booking
+    public class Booking
     {
         //handles each booking
         //every booking must have a customer, every booking can have between 0 and 4 guests

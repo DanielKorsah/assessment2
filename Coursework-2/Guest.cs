@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Coursework_2
 {
-    class Guest
+    public class Guest
     {
         //Handle each guest
         //4 guests can be listed per booking

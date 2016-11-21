@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows;
+using System.Text.RegularExpressions;
 
 namespace Coursework_2
 {
-    class UserTracker //class to store and retrieve details from any user based on userId - Singleton pattern
+    public class UserTracker //class to store and retrieve details from any user based on userId - Singleton pattern
     {
 
         private string _path; //the location where users' gubbins will be stored and read from
+        
 
         //<singletonify it>
         private static UserTracker instance; //only reference to UserTracker object
@@ -40,6 +42,7 @@ namespace Coursework_2
         public void Store(Customer currentCustomer) //a method to store each customer in a text file along with their gubbins
         {
             DirectoryManager directory = new DirectoryManager();
+
             _path = directory.GetPath() + "Customers.txt";
 
             try //check that there is a valid file path
@@ -54,7 +57,51 @@ namespace Coursework_2
                 MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
                 MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
             }
-
         }
+
+        //<lookup user and get properties based on user reference number>
+        public void CheckCustId(string checkNum, Customer currentCustomer)
+        {
+            DirectoryManager directory = new DirectoryManager();
+
+            _path = directory.GetPath() + "Customers.txt"; //select correct file location to read
+            string[] lines = File.ReadAllLines(_path);                                  //read in file
+            foreach(string line in lines)                                               //for each line in the file do the following
+            {
+                if (line.Contains(checkNum))                                            //execute if line contains the user reference number entered by user
+                {
+                    string[] words = Regex.Split(line,", ");                            //split line into individual parts
+
+                    string customerRefString = "";                                      //intermediate string
+                    customerRefString = words[0];                                       //first word is ALWAYS customer reference number
+                    currentCustomer.CustomerRef = Int32.Parse(customerRefString);       //turn string into int and apply to current customer reference number
+
+                    currentCustomer.Name = words[1];                                    //second word is ALWAYS name
+
+                    if (words[3] == "")//if no line 2 of address address is always words 2, 4 and 5
+                    {
+                        currentCustomer.Address = words[2] + ", " + words[4] + ", " + words[5]; 
+                    }
+                    else //otherwise words 2 to 5 are always the whole address
+                    {
+                        currentCustomer.Address = words[2] + ", " + words[3] + ", " + words[4] + ", " + words[5];
+                    }
+
+
+                    for (int i = 6; i<words.Length; i++) //any words after this are booking reference numbers for bookings made by this customer, load them nto memory
+                    {
+                        string bookingString = words[i];
+                        int _bookingRef = Int32.Parse(bookingString); //convert string to int
+                        currentCustomer.AddCustBookings(_bookingRef); //load list of booking reference numbers associated with this customer into memory one at a time
+                    }
+                }
+                else //otherwise user does not already exist
+                {
+                    MessageBox.Show("Your account has not been found. Go back and register.", "Account not found.", //show reason for error
+                        MessageBoxButton.OK, MessageBoxImage.Error); //give it the bonk noise, I love that noise so much
+                }
+            }
+        }
+        //</lookup user and get properties based on user reference number>
     }
 }
