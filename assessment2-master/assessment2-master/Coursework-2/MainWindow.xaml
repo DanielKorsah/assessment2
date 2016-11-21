@@ -1,0 +1,10 @@
+﻿<Window x:Class="Coursework_2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="500" Width="700">
+    <Grid>
+        <Button x:Name="newButton" Content="New Customer" HorizontalAlignment="Left" Margin="92,186,0,0" VerticalAlignment="Top" Width="200" Height="75" Click="newButton_Click" FontSize="16"/>
+        <Button x:Name="returningButton" Content="Returning Customer" HorizontalAlignment="Left" Margin="395,186,0,0" VerticalAlignment="Top" Width="200" Height="75" Click="returningButton_Click" FontSize="16"/>
+
+    </Grid>
+</Window>
