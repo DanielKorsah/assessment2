@@ -46,5 +46,12 @@ namespace Coursework_2
                 createBooking.Show(); //on with the show, start making a booking
             }
         }
+
+        private void button_Click_1(object sender, RoutedEventArgs e)
+        {
+            MainWindow startPage = new MainWindow();
+            startPage.Show();
+            this.Close();
+        }
     }
 }

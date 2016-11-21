@@ -36,6 +36,7 @@ namespace Coursework_2
         {
             LogIn logInPage = new LogIn();
             logInPage.Show();
+            this.Close();
         }
 
 

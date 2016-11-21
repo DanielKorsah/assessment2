@@ -33,5 +33,12 @@ namespace Coursework_2
             tracker.CheckCustId(checkNum, currentCustomer); 
 
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow startPage = new MainWindow();
+            startPage.Show();
+            this.Close();
+        }
     }
 }

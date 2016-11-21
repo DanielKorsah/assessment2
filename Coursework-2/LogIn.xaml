@@ -9,7 +9,8 @@
     <Grid>
         <TextBox x:Name="custRefBox" HorizontalAlignment="Left" Height="23" Margin="48,121,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="button" Content="Log In" HorizontalAlignment="Left" Margin="228,122,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-        <Label x:Name="label" Content="Log in with your Customer reference number." HorizontalAlignment="Left" Margin="48,41,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label" Content="Log in with your Customer reference number." HorizontalAlignment="Left" Margin="48,90,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button1" Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
 
     </Grid>
 </Window>
