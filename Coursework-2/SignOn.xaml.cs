@@ -38,6 +38,8 @@ namespace Coursework_2
             Customer currentCustomer = new Customer(name1, name2, address1, address2, city, postCode); //pass Customer details to Customer constructor
             UserTracker tracker = UserTracker.Instance; //return the only instance of UserTracker
 
+            tracker.Store(currentCustomer);
+
             CreateBooking createBooking = new CreateBooking(currentCustomer);
             createBooking.Show();
         }

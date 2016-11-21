@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Coursework_2
 {
@@ -24,8 +25,13 @@ namespace Coursework_2
             }
         }
 
-        public void Store(Customer currentCustomer)
+        public void Store(Customer currentCustomer) //a method to store each customer in a text file along with their gubbins
         {
+            string path = @"G:\Customers.csv"; //the location of said gubbins
+            using (StreamWriter userTable = File.AppendText(path)) //have a stream writer to append the line of gubbins to a file at the location in path
+            {
+                userTable.WriteLine(currentCustomer.Name + " " + currentCustomer.Address); //the gubbins being printed
+            }
 
         }
     }
