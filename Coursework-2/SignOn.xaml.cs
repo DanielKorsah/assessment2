@@ -22,7 +22,7 @@ namespace Coursework_2
         public SignOn()
         {
             InitializeComponent();
-            
         }
+
     }
 }

@@ -84,7 +84,7 @@ namespace Coursework_2
             else //error, only 4 or less allowed
             {
                 MessageBox.Show("Max number of guests reached.", "No more guests.", //show reason for error
-                    MessageBoxButton.OK, MessageBoxImage.Error); //give error box an OK button and have properties of an error- i.e. bonk noise and red X
+                    MessageBoxButton.OK, MessageBoxImage.Error); //give it the bonk noise and big fuck-off red X
             }
         }
     }
