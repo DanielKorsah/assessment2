@@ -11,7 +11,7 @@ namespace Coursework_2
 {
     public class UserTracker //class to store and retrieve details from any user based on userId - Singleton pattern
     {
-
+        DirectoryManager directory = new DirectoryManager();
         private string _path; //the location where users' gubbins will be stored and read from
         
 
@@ -41,8 +41,6 @@ namespace Coursework_2
 
         public void Store(Customer currentCustomer) //a method to store each customer in a text file along with their gubbins
         {
-            DirectoryManager directory = new DirectoryManager();
-
             _path = directory.GetPath() + "Customers.txt";
 
             try //check that there is a valid file path
@@ -62,8 +60,7 @@ namespace Coursework_2
         //<lookup user and get properties based on user reference number>
         public void CheckCustId(string checkNum, Customer currentCustomer)
         {
-            DirectoryManager directory = new DirectoryManager();
-
+            
             _path = directory.GetPath() + "Customers.txt"; //select correct file location to read
             string[] lines = File.ReadAllLines(_path);                                  //read in file
             foreach(string line in lines)                                               //for each line in the file do the following
