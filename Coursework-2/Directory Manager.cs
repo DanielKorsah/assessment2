@@ -22,7 +22,7 @@ namespace Coursework_2
             {
                 if (instance == null) //if this is the first call (i.e. instance is not null)
                 {
-                    instance = new UserTracker(); //instanciate the object
+                    UserTracker tracker = UserTracker.Instance; //instanciate the object
                 }
                 return instance; //else return instance (null)
             }
