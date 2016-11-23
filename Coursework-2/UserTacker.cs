@@ -65,16 +65,20 @@ namespace Coursework_2
             string[] lines = File.ReadAllLines(_path);                                  //read in file
             foreach(string line in lines)                                               //for each line in the file do the following
             {
-                if (line.Contains(checkNum))                                            //execute if line contains the user reference number entered by user
+                if (line.Contains("Cusomer Ref: " + checkNum))                          //execute if line contains customer reference number, marked different from booking refs by preceding text
                 {
                     string[] words = Regex.Split(line,", ");                            //split line into individual parts
 
-                    string customerRefString = "";                                      //intermediate string
-                    customerRefString = words[0];                                       //first word is ALWAYS customer reference number
+                    //<get customer ref number>
+                    string[] refComponents = Regex.Split(words[0], ": ");              //split split customer ref num from it's marker text
+                    string customerRefString;                                           //intermediate string to represent customer ref num
+                    customerRefString = refComponents[0];                                       //first word is ALWAYS customer reference number
                     currentCustomer.CustomerRef = Int32.Parse(customerRefString);       //turn string into int and apply to current customer reference number
+                    //</get customer ref number>
 
                     currentCustomer.Name = words[1];                                    //second word is ALWAYS name
 
+                    //<compose address>
                     if (words[3] == "")//if no line 2 of address address is always words 2, 4 and 5
                     {
                         currentCustomer.Address = words[2] + ", " + words[4] + ", " + words[5]; 
@@ -83,14 +87,17 @@ namespace Coursework_2
                     {
                         currentCustomer.Address = words[2] + ", " + words[3] + ", " + words[4] + ", " + words[5];
                     }
+                    //</compose address>
 
-
+                    //<identify bookings linked to customer>
                     for (int i = 6; i<words.Length; i++) //any words after this are booking reference numbers for bookings made by this customer, load them nto memory
                     {
                         string bookingString = words[i];
                         int _bookingRef = Int32.Parse(bookingString); //convert string to int
                         currentCustomer.AddCustBookings(_bookingRef); //load list of booking reference numbers associated with this customer into memory one at a time
                     }
+                    //<identify bookings linked to this customer
+
                 }
                 else //otherwise user does not already exist
                 {
