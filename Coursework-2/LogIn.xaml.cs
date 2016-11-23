@@ -30,7 +30,7 @@ namespace Coursework_2
             Customer currentCustomer = new Customer(); 
             UserTracker tracker = UserTracker.Instance; //singleton instance of UserTracker
 
-            tracker.CheckCustId(checkNum, currentCustomer); //check persisntence file for customer records on 
+            tracker.ReadCustomer(checkNum, currentCustomer); //check persisntence file for customer records on 
 
         }
 

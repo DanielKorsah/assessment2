@@ -58,7 +58,7 @@ namespace Coursework_2
         }
 
         //<lookup user and get properties based on user reference number>
-        public void CheckCustId(string checkNum, Customer currentCustomer)
+        public void ReadCustomer(string checkNum, Customer currentCustomer)
         {
             
             _path = directory.GetPath() + "Customers.txt"; //select correct file location to read
