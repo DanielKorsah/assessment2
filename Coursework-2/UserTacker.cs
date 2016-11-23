@@ -47,7 +47,7 @@ namespace Coursework_2
             {
                 using (StreamWriter userTable = File.AppendText(_path)) //have a stream writer to append the line of gubbins to a file at the location in path
                 {
-                    userTable.WriteLine(currentCustomer.CustomerRef + ", " + currentCustomer.Name + " " + currentCustomer.Address); //the gubbins being printed in format [id, name, address]
+                    userTable.WriteLine("Customer Ref: " + currentCustomer.CustomerRef + ", " + currentCustomer.Name + " " + currentCustomer.Address); //the gubbins being printed in format [id, name, address]
                 }
             }
             catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
