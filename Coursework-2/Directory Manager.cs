@@ -8,10 +8,26 @@ using System.Windows;
 
 namespace Coursework_2
 {
-    public class DirectoryManager //class to choose the correct file path or return null if none available are valid
+    public class DirectoryManager // Singleton - class to choose the correct file path or return null if none available are valid
     {
         private string path; //string storing the path to a persistence folder where all persistent files will be stored
 
+        //<make it a singleton>
+        private static DirectoryManager instance; //only reference to Directorymanager object
+        private DirectoryManager() { } //set to private so it can't be called
+
+        public static DirectoryManager Instance
+        {
+            get
+            {
+                if (instance == null) //if this is the first call (i.e. instance is not null)
+                {
+                    instance = new UserTracker(); //instanciate the object
+                }
+                return instance; //else return instance (null)
+            }
+        }
+        //</make it a singleton>
 
         //<validate file path>
         public string GetPath()
@@ -37,8 +53,9 @@ namespace Coursework_2
             {
                 path = null;
             }
+            //</validate file path>
 
-            return path;
+            return path; //return the correct path if a valid one exists, if validation fails return null
             
         }
     }

@@ -11,7 +11,7 @@ namespace Coursework_2
 {
     public class UserTracker //class to store and retrieve details from any user based on userId - Singleton pattern
     {
-        DirectoryManager directory = new DirectoryManager();
+        DirectoryManager directory = DirectoryManager.Instance; //create a singleton object for the directory manager
         private string _path; //the location where users' gubbins will be stored and read from
         
 
