@@ -14,7 +14,8 @@ namespace Coursework_2
         private string name; //name of person making booking
         private string address; //address of said customer
         private int customerRef = 1; //unique identifying number for each guest starting at 1
-        private List<int> custBookings = new List<int> { }; 
+        private List<int> custBookings = new List<int> { };
+        private string stringRef;
 
         public string Name //name accessor
         {
@@ -56,5 +57,10 @@ namespace Coursework_2
             custBookings.Add(_bookingRef);
         }
         
+        public string StringRef()
+        {
+            stringRef = customerRef.ToString();
+            return stringRef;
+        }
     }
 }

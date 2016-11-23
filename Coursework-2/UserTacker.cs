@@ -55,6 +55,21 @@ namespace Coursework_2
                 MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
                 MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
             }
+
+
+            _path = directory.GetPath() + "CustCount.txt";
+            try //check that there is a valid file path
+            {
+                //string nextCustomerRef = currentCustomer.StringRef();
+                using (StreamWriter refIncrementer = File.WriteAllText(_path, "currentCustomer.CustomerRef")) ; //overwrite the file with the next customer ref number to be dealt out
+            }
+            catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
+            {
+                MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
+                MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
+            }
+
+
         }
 
         //<lookup user and get properties based on user reference number>
