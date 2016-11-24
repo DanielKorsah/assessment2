@@ -57,10 +57,6 @@ namespace Coursework_2
             custBookings.Add(_bookingRef);
         }
         
-        public string StringRef()
-        {
-            stringRef = customerRef.ToString();
-            return stringRef;
-        }
+        
     }
 }

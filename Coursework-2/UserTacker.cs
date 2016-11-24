@@ -39,10 +39,33 @@ namespace Coursework_2
             set { _path = value; }
         }
 
-        public void Store(Customer currentCustomer) //a method to store each customer in a text file along with their gubbins
+        public void Store(Customer currentCustomer) //a method to store each customer in a text file along with their gubbins and auto-increment their customer ref
         {
-            _path = directory.GetPath() + "Customers.txt";
 
+            if (!File.Exists(directory.GetPath() + "CustCount.txt")) //initialise the incrementation file for customer ref if it doesnt already exist
+            {
+                _path = directory.GetPath() + "CustCount.txt"; //new path for file containing customer ref persidtence
+                try //check that there is a valid file path
+                {
+                    using (StreamWriter refIncrementer = new StreamWriter(_path, false)) //streamwriter to overwrite to specified path
+                    {
+                        refIncrementer.WriteLine(1); //print customer ref for next customer to be stored
+                    }
+                }
+                catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
+                {
+                    MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
+                    MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
+                }
+            }
+            else //otherwise there is already a persistence file and this should determine the customer ref
+            {
+                string incrementRef = File.ReadAllText(_path);
+                currentCustomer.CustomerRef = Int32.Parse(incrementRef); //set customer ref to whatever number was in the file
+            }
+
+
+            _path = directory.GetPath() + "Customers.txt"; //set path for full customer persistence file
             try //check that there is a valid file path
             {
                 using (StreamWriter userTable = File.AppendText(_path)) //have a stream writer to append the line of gubbins to a file at the location in path
@@ -56,21 +79,24 @@ namespace Coursework_2
                 MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
             }
 
+            currentCustomer.CustomerRef += 1; //thisis the customer ref for the next user to sign on
 
-            _path = directory.GetPath() + "CustCount.txt";
+            _path = directory.GetPath() + "CustCount.txt"; //set path for file containing customer ref persidtence
             try //check that there is a valid file path
             {
-                //string nextCustomerRef = currentCustomer.StringRef();
-                using (StreamWriter refIncrementer = File.WriteAllText(_path, "currentCustomer.CustomerRef")) ; //overwrite the file with the next customer ref number to be dealt out
+                using (StreamWriter refIncrementer = new StreamWriter(_path, false)) //streamwriter to overwrite to specified path
+                {
+                    refIncrementer.WriteLine(currentCustomer.CustomerRef); //print customer ref for next customer to be stored
+                }
+
             }
             catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
             {
                 MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
                 MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
             }
-
-
         }
+
 
         //<lookup user and get properties based on user reference number>
         public void ReadCustomer(string checkNum, Customer currentCustomer)
