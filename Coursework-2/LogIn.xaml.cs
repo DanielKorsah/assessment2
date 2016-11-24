@@ -32,6 +32,11 @@ namespace Coursework_2
 
             tracker.ReadCustomer(checkNum, currentCustomer); //check persisntence file for customer records on 
 
+            CreateBooking createBooking = new CreateBooking(currentCustomer);
+            if (currentCustomer.CustomerRef == Int32.Parse(checkNum)) //if the customer ref (and therefore other details) were successfully set
+            {
+                createBooking.Show(); //on with the show, start making a booking
+            }
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)

@@ -106,15 +106,15 @@ namespace Coursework_2
             string[] lines = File.ReadAllLines(_path);                                  //read in file
             foreach(string line in lines)                                               //for each line in the file do the following
             {
-                if (line.Contains("Cusomer Ref: " + checkNum))                          //execute if line contains customer reference number, marked different from booking refs by preceding text
+                if (line.Contains("Customer Ref: " + checkNum))                          //execute if line contains customer reference number, marked different from booking refs by preceding text
                 {
                     string[] words = Regex.Split(line,", ");                            //split line into individual parts
 
                     //<get customer ref number>
                     string[] refComponents = Regex.Split(words[0], ": ");              //split split customer ref num from it's marker text
                     string customerRefString;                                           //intermediate string to represent customer ref num
-                    customerRefString = refComponents[0];                                       //first word is ALWAYS customer reference number
-                    currentCustomer.CustomerRef = Int32.Parse(customerRefString);       //turn string into int and apply to current customer reference number
+                    customerRefString = refComponents[1];                                       //first word is ALWAYS customer reference number
+                    currentCustomer.CustomerRef = Int32.Parse(refComponents[1]);       //turn string into int and apply to current customer reference number
                     //</get customer ref number>
 
                     currentCustomer.Name = words[1];                                    //second word is ALWAYS name
@@ -140,10 +140,11 @@ namespace Coursework_2
                     //<identify bookings linked to this customer
 
                 }
-                else //otherwise user does not already exist
+                else if (line == null)//otherwise user does not already exist
                 {
                     MessageBox.Show("Your account has not been found. Go back and register.", "Account not found.", //show reason for error
                         MessageBoxButton.OK, MessageBoxImage.Error); //give it the bonk noise, I love that noise so much
+                    break;
                 }
             }
         }
