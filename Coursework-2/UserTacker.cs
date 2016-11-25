@@ -61,11 +61,11 @@ namespace Coursework_2
             else //otherwise there is already a persistence file and this should determine the customer ref
             {
                
-                string nextRef = File.ReadAllText(_path);                                  //read in file
-                foreach (string line in nextRef)                                               //for each line in the file do the following
+                string[] nextRef = File.ReadAllText(_path);                               //read in file
+                foreach (string line in nextRef)                                        //for each line in the file do the following
                 {
                     int incrementRef = line[0];
-                    currentCustomer.CustomerRef = incrementRef; //set customer ref to whatever number was in the file
+                    currentCustomer.CustomerRef = incrementRef;                         //set customer ref to whatever number was in the file
                 }
                  
             }
