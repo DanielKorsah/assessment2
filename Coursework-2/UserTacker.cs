@@ -50,6 +50,7 @@ namespace Coursework_2
                     using (StreamWriter refIncrementer = new StreamWriter(_path, false)) //streamwriter to overwrite to specified path
                     {
                         refIncrementer.WriteLine(1); //print customer ref for next customer to be stored
+                        currentCustomer.CustomerRef = 1;
                     }
                 }
                 catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
@@ -61,7 +62,7 @@ namespace Coursework_2
             else //otherwise there is already a persistence file and this should determine the customer ref
             {
                
-                string[] nextRef = File.ReadAllText(_path);                               //read in file
+                string[] nextRef = File.ReadAllLines(_path);                               //read in file
                 foreach (string line in nextRef)                                        //for each line in the file do the following
                 {
                     int incrementRef = line[0];

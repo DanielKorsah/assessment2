@@ -47,7 +47,7 @@ namespace Coursework_2
             }
             else if (!Directory.Exists(@"D:\") && !Directory.Exists(@"F:\") && !Directory.Exists(@"G:\"))//if no USB at merchiston use H drive
             {
-                path = @"H:\Persistence";
+                path = @"H:\Persistence\";
             }
             else //Where are you even trying to run this?
             {
