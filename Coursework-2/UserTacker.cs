@@ -101,28 +101,29 @@ namespace Coursework_2
         //<lookup user and get properties based on user reference number>
         public void ReadCustomer(string checkNum, Customer currentCustomer)
         {
-            
-            _path = directory.GetPath() + "Customers.txt"; //select correct file location to read
+            bool match = false;                                                         //flag to allow checking if a match was found for the entered customer ref
+            _path = directory.GetPath() + "Customers.txt";                              //select correct file location to read
             string[] lines = File.ReadAllLines(_path);                                  //read in file
-            foreach(string line in lines)                                               //for each line in the file do the following
+            foreach (string line in lines)                                               //for each line in the file do the following
             {
-                if (line.Contains("Customer Ref: " + checkNum))                          //execute if line contains customer reference number, marked different from booking refs by preceding text
+                if (line.Contains("Customer Ref: " + checkNum))                         //execute if line contains customer reference number, marked different from booking refs by preceding text
                 {
-                    string[] words = Regex.Split(line,", ");                            //split line into individual parts
+                    string[] words = Regex.Split(line, ", ");                            //split line into individual parts
 
                     //<get customer ref number>
-                    string[] refComponents = Regex.Split(words[0], ": ");              //split split customer ref num from it's marker text
+                    string[] refComponents = Regex.Split(words[0], ": ");               //split split customer ref num from it's marker text
                     string customerRefString;                                           //intermediate string to represent customer ref num
-                    customerRefString = refComponents[1];                                       //first word is ALWAYS customer reference number
-                    currentCustomer.CustomerRef = Int32.Parse(refComponents[1]);       //turn string into int and apply to current customer reference number
+                    customerRefString = refComponents[1];                               //first word is ALWAYS customer reference number
+                    currentCustomer.CustomerRef = Int32.Parse(refComponents[1]);        //turn string into int and apply to current customer reference number
                     //</get customer ref number>
 
+                    match = true;                                                       
                     currentCustomer.Name = words[1];                                    //second word is ALWAYS name
 
                     //<compose address>
                     if (words[3] == "")//if no line 2 of address address is always words 2, 4 and 5
                     {
-                        currentCustomer.Address = words[2] + ", " + words[4] + ", " + words[5]; 
+                        currentCustomer.Address = words[2] + ", " + words[4] + ", " + words[5];
                     }
                     else //otherwise words 2 to 5 are always the whole address
                     {
@@ -131,21 +132,19 @@ namespace Coursework_2
                     //</compose address>
 
                     //<identify bookings linked to customer>
-                    for (int i = 6; i<words.Length; i++) //any words after this are booking reference numbers for bookings made by this customer, load them nto memory
+                    for (int i = 6; i < words.Length; i++) //any words after this are booking reference numbers for bookings made by this customer, load them nto memory
                     {
                         string bookingString = words[i];
                         int _bookingRef = Int32.Parse(bookingString); //convert string to int
                         currentCustomer.AddCustBookings(_bookingRef); //load list of booking reference numbers associated with this customer into memory one at a time
                     }
                     //<identify bookings linked to this customer
-
                 }
-                else if (line == null)//otherwise user does not already exist
-                {
-                    MessageBox.Show("Your account has not been found. Go back and register.", "Account not found.", //show reason for error
-                        MessageBoxButton.OK, MessageBoxImage.Error); //give it the bonk noise, I love that noise so much
-                    break;
-                }
+            }
+            if (match == false)
+            {
+                MessageBox.Show("The customer reference number you entered was not recognised. Go back and sign in.", "User not found.", //show reason for error
+                MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
             }
         }
         //</lookup user and get properties based on user reference number>

@@ -23,5 +23,6 @@ namespace Coursework_2
         {
             InitializeComponent();
         }
+
     }
 }

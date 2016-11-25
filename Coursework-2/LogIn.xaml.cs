@@ -39,7 +39,7 @@ namespace Coursework_2
             }
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void button1_Click(object sender, RoutedEventArgs e) //go back to main menu on click
         {
             MainWindow startPage = new MainWindow();
             startPage.Show();
