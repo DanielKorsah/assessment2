@@ -115,7 +115,7 @@ namespace Coursework_2
             {
                 if (line.Contains("Customer Ref: " + checkNum))                         //execute if line contains customer reference number, marked different from booking refs by preceding text
                 {
-                    string[] words = Regex.Split(line, ", ");                            //split line into individual parts
+                    string[] words = Regex.Split(line, ", ");                           //split line into individual parts
 
                     //<get customer ref number>
                     string[] refComponents = Regex.Split(words[0], ": ");               //split split customer ref num from it's marker text

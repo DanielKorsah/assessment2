@@ -40,10 +40,10 @@ namespace Coursework_2
 
             tracker.Store(currentCustomer);
 
-            CreateBooking createBooking = new CreateBooking(currentCustomer);
+            HubPage hub = new HubPage(currentCustomer);
             if (tracker._Path != null) //if the details were successfully printed to the a valid file path
             {
-                createBooking.Show(); //on with the show, start making a booking
+                hub.Show(); //on with the show, start making a booking
             }
         }
 
