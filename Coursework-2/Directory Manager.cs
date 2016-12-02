@@ -34,20 +34,36 @@ namespace Coursework_2
         {
             if (Directory.Exists(@"D:\") && !Directory.Exists(@"F:\"))//set to D drive for USB in games lab 
             {
-                Directory.CreateDirectory(@"D:\Persistence");
+                if (!Directory.Exists(@"D:\Persistence")) //make sure there is a Persistence directory same goes for the following drive checks
+                {
+                    Directory.CreateDirectory(@"D:\Persistence"); 
+                }
                 path = @"D:\Persistence\"; 
             }
             else if (Directory.Exists(@"F:\") && !Directory.Exists(@"G:\")) //set to F drive for USB in JKCC
             {
-                path = @"F:\Persistence\";
+                if (!Directory.Exists(@"F:\Persistence"))
+                {
+                    Directory.CreateDirectory(@"F:\Persistence");
+                }
+                    path = @"F:\Persistence\";
             }
             else if (Directory.Exists(@"G:\")) //drive G for USB drive at home
             {
-                path = @"G:\Persistence\";
+                if (!Directory.Exists(@"G:\Persistence"))
+                {
+                    Directory.CreateDirectory(@"G:\Persistence");
+                }
+                    path = @"G:\Persistence\";
             }
             else if (!Directory.Exists(@"D:\") && !Directory.Exists(@"F:\") && !Directory.Exists(@"G:\"))//if no USB at merchiston use H drive
             {
+                if (!Directory.Exists(@"H:\Persistence"))
+                {
+                    Directory.CreateDirectory(@"H:\Persistence");
+                }
                 path = @"H:\Persistence\";
+                
             }
             else //Where are you even trying to run this?
             {
