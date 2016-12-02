@@ -41,8 +41,8 @@ namespace Coursework_2
 
         public void Store(Customer currentCustomer) //a method to store each customer in a text file along with their gubbins and auto-increment their customer ref
         {
-
-            if (!File.Exists(directory.GetPath() + "CustCount.txt")) //initialise the incrementation file for customer ref if it doesnt already exist
+            
+            if (!File.Exists(_path)) //initialise the incrementation file for customer ref if it doesnt already exist
             {
                 _path = directory.GetPath() + "CustCount.txt"; //new path for file containing customer ref persidtence
                 try //check that there is a valid file path
@@ -61,7 +61,7 @@ namespace Coursework_2
             }
             else //otherwise there is already a persistence file and this should determine the customer ref
             {
-               
+                _path = directory.GetPath() + "CustCount.txt";
                 string[] nextRef = File.ReadAllLines(_path);                               //read in file
                 foreach (string line in nextRef)                                        //for each line in the file do the following
                 {

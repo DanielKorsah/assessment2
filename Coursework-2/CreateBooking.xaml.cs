@@ -31,5 +31,12 @@ namespace Coursework_2
             string temp = inDatePick.Text;
             label.Content = temp;
         }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            HubPage hub = new HubPage(workingCustomer);
+            hub.Show();
+            this.Close();
+        }
     }
 }

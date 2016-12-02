@@ -20,6 +20,7 @@ namespace Coursework_2
     public partial class HubPage : Window
     {
         private Customer hubCust; //customer to be assigned value of mcurrentCustomer
+
         public HubPage(Customer currentCustomer)
         {
             InitializeComponent();
