@@ -19,9 +19,11 @@ namespace Coursework_2
     /// </summary>
     public partial class HubPage : Window
     {
-        public HubPage()
+        private Customer hubCust; //customer to be assigned value of mcurrentCustomer
+        public HubPage(Customer currentCustomer)
         {
             InitializeComponent();
+            hubCust = currentCustomer; //assign values in currentCustomer to hubCust to allow the button clicks to use it
         }
 
 
@@ -31,10 +33,11 @@ namespace Coursework_2
         }
 
 
-        private void bookingButton_Click(object sender, RoutedEventArgs e, Customer currentCustomer)
+        private void bookingButton_Click(object sender, RoutedEventArgs e)
         {
-            CreateBooking currentBooking = new CreateBooking(currentCustomer);
+            CreateBooking currentBooking = new CreateBooking(hubCust);
             currentBooking.Show();
+            this.Close();
         }
 
 

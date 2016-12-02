@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BookingTracker.cs" />
     <Compile Include="CreateBooking.xaml.cs">
       <DependentUpon>CreateBooking.xaml</DependentUpon>
     </Compile>

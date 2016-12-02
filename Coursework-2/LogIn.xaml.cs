@@ -36,6 +36,7 @@ namespace Coursework_2
             if (currentCustomer.CustomerRef == Int32.Parse(checkNum)) //if the customer ref (and therefore other details) were successfully set
             {
                 hub.Show(); //on with the show, start making a booking
+                this.Close();
             }
         }
 

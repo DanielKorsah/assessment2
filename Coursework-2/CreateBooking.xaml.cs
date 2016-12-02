@@ -19,10 +19,17 @@ namespace Coursework_2
     /// </summary>
     public partial class CreateBooking : Window
     {
-        public CreateBooking(Customer currentCustomer)
+        Customer workingCustomer = null;
+        public CreateBooking(Customer hubCust)
         {
             InitializeComponent();
+            workingCustomer = hubCust;
         }
 
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            string temp = inDatePick.Text;
+            label.Content = temp;
+        }
     }
 }
