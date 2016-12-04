@@ -47,5 +47,11 @@ namespace Coursework_2
 
         }
 
+        private void logOutButton_Click(object sender, RoutedEventArgs e) //go back to the start page
+        {
+            MainWindow startPage = new Coursework_2.MainWindow();
+            startPage.Show();
+            this.Close();
+        }
     }
 }

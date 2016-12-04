@@ -25,11 +25,41 @@ namespace Coursework_2
             InitializeComponent();
             workingCustomer = hubCust;
         }
+        
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            string temp = inDatePick.Text;
-            label.Content = temp;
+            if (inDatePick.SelectedDate.Value.Date != null && outDatePick.SelectedDate.Value.Date != null)
+            {
+                Booking currentBooking = new Booking();                                     //instanciate current booking
+                currentBooking.ArrivalDate = inDatePick.SelectedDate.Value.Date;            //set arrival dat eto chosen datepicker vaule
+                currentBooking.DepartureDate = outDatePick.SelectedDate.Value.Date;         //ditto for departure date
+                currentBooking.Diet = dietBox.Text;                                         //diet requirements get set
+
+                //check if extra: breakfast is selected                                     //please forgive lack of brakets but this part is insanely long for what it is with them
+                if (breakfastBox.IsChecked == true)
+                    currentBooking.Breakfast = true;
+                else
+                    currentBooking.Breakfast = false;
+
+                //check if extra: meals is selected
+                if (mealsBox.IsChecked == true)
+                    currentBooking.Meals = true;
+                else
+                    currentBooking.Meals = true;
+
+                //check if extra: hire car is selected
+                if (carBox.IsChecked == true)
+                    currentBooking.CarHire = true;
+                else
+                    currentBooking.CarHire = true;
+
+            }
+            else
+            {
+                MessageBox.Show("You must enter fill out all compulsory(*) fields!", "Missing data.", // reason for error
+                MessageBoxButton.OK, MessageBoxImage.Error); //give 'em a BONK 
+            }
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

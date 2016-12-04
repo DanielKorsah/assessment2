@@ -41,7 +41,8 @@ namespace Coursework_2
 
         public void Store(Customer currentCustomer) //a method to store each customer in a text file along with their gubbins and auto-increment their customer ref
         {
-            
+
+            //<autoincrement customer ref>
             if (!File.Exists(directory.GetPath() + "CustCount.txt")) //initialise the incrementation file for customer ref if it doesnt already exist
             {
                 _path = directory.GetPath() + "CustCount.txt"; //new path for file containing customer ref persidtence
@@ -70,7 +71,7 @@ namespace Coursework_2
                 }
                  
             }
-
+            //<autoincrement customer ref>
 
             _path = directory.GetPath() + "Customers.txt"; //set path for full customer persistence file
             try //check that there is a valid file path
@@ -88,7 +89,7 @@ namespace Coursework_2
 
             
 
-            _path = directory.GetPath() + "CustCount.txt"; //set path for file containing customer ref persidtence
+            _path = directory.GetPath() + "CustCount.txt"; //set path for file containing customer ref persistence
             try //check that there is a valid file path
             {
                 using (StreamWriter refIncrementer = new StreamWriter(_path, false)) //streamwriter to overwrite to specified path
@@ -148,6 +149,8 @@ namespace Coursework_2
                         currentCustomer.AddCustBookings(_bookingRef); //load list of booking reference numbers associated with this customer into memory one at a time
                     }
                     //<identify bookings linked to this customer
+
+                    break; //stop loop for efficiency after we've found what we need
                 }
             }
             if (match == false)

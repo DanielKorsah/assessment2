@@ -41,6 +41,7 @@ namespace Coursework_2
 
         void Store(Booking currentBooking, Customer currentCustomer)
         {
+            //<autoincrement booking ref>
             if (!File.Exists(directory.GetPath() + "BookingCount.txt")) //initialise the incrementation file for customer ref if it doesnt already exist
             {
                 _path = directory.GetPath() + "BookingCount.txt"; //new path for file containing customer ref persidtence
@@ -60,16 +61,16 @@ namespace Coursework_2
             }
             else //otherwise there is already a persistence file and this should determine the booking ref
             {
-
-                string[] nextRef = File.ReadAllLines(_path);                               //read in file
-                foreach (string line in nextRef)                                        //for each line in the file do the following
+                _path = directory.GetPath() + "CustCount.txt";
+                string[] nextRef = File.ReadAllLines(_path);                                //read in file
+                foreach (string line in nextRef)                                            //for each line in the file do the following
                 {
-                    int incrementRef = line[0];
-                    currentBooking.BookingRef = incrementRef;                         //set booking ref to whatever number was in the file
+                    string incrementRef = line;
+                    currentCustomer.CustomerRef = Int32.Parse(incrementRef);                //set customer ref to whatever number was in the file
                 }
-
+                 
             }
-
+            //</autoincrement booking ref>
 
             _path = directory.GetPath() + "Bookings.txt"; //set path for full customer persistence file
             try //check that there is a valid file path
@@ -94,7 +95,8 @@ namespace Coursework_2
             {
                 using (StreamWriter refIncrementer = new StreamWriter(_path, false)) //streamwriter to overwrite to specified path
                 {
-                    refIncrementer.WriteLine(currentCustomer.CustomerRef); //print customer ref for next customer to be stored
+                    int incrementer = currentBooking.BookingRef += 1;
+                    refIncrementer.WriteLine(incrementer); //print customer ref for next customer to be stored
                 }
 
             }
