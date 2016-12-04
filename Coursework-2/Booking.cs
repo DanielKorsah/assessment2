@@ -21,9 +21,9 @@ namespace Coursework_2
 
         //<optional extras>
         private string diet;
-        private bool? breakfast;
-        private bool? meals;                                     //the dietary requirements associated with breakfast and/or evening meals - must be present if meals or breakfast are requested
-        private bool? carHire;
+        private bool breakfast;
+        private bool meals;                                     //the dietary requirements associated with breakfast and/or evening meals - must be present if meals or breakfast are requested
+        private bool carHire;
         //</optional extras>
 
         public DateTime ArrivalDate     //accessor to get/set start date of the booking
