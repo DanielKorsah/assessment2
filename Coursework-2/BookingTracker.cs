@@ -11,7 +11,7 @@ namespace Coursework_2
 {
     class BookingTracker
     {
-        DirectoryManager directory = DirectoryManager.Instance; //create a singleton instance for the directory manager
+        DirectoryManager directory = DirectoryManager.Instance; //create a singleton instance for the booking tracker
         private string _path; //the location where bookings will be stored and read from
 
 

@@ -65,8 +65,8 @@ namespace Coursework_2
                 string[] nextRef = File.ReadAllLines(_path);                               //read in file
                 foreach (string line in nextRef)                                        //for each line in the file do the following
                 {
-                    int incrementRef = line[0];
-                    currentCustomer.CustomerRef = incrementRef;                         //set customer ref to whatever number was in the file
+                    string incrementRef = line;
+                    currentCustomer.CustomerRef = Int32.Parse(incrementRef);                         //set customer ref to whatever number was in the file
                 }
                  
             }
@@ -86,14 +86,15 @@ namespace Coursework_2
                 MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
             }
 
-            currentCustomer.CustomerRef += 1; //thisis the customer ref for the next user to sign on
+            
 
             _path = directory.GetPath() + "CustCount.txt"; //set path for file containing customer ref persidtence
             try //check that there is a valid file path
             {
                 using (StreamWriter refIncrementer = new StreamWriter(_path, false)) //streamwriter to overwrite to specified path
                 {
-                    refIncrementer.WriteLine(currentCustomer.CustomerRef); //print customer ref for next customer to be stored
+                    int incrementer = currentCustomer.CustomerRef += 1; //temporary - this is the customer ref for the next user to sign on
+                    refIncrementer.WriteLine(incrementer); //print customer ref for next customer to be stored
                 }
 
             }
@@ -102,6 +103,7 @@ namespace Coursework_2
                 MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
                 MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
             }
+            
         }
 
 
