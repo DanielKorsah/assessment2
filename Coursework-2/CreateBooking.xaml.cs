@@ -32,6 +32,7 @@ namespace Coursework_2
             if (inDatePick.SelectedDate.Value.Date != null && outDatePick.SelectedDate.Value.Date != null)
             {
                 Booking currentBooking = new Booking();                                     //instanciate current booking
+                BookingTracker booker = BookingTracker.Instance;
                 currentBooking.ArrivalDate = inDatePick.SelectedDate.Value.Date;            //set arrival dat eto chosen datepicker vaule
                 currentBooking.DepartureDate = outDatePick.SelectedDate.Value.Date;         //ditto for departure date
                 currentBooking.Diet = dietBox.Text;                                         //diet requirements get set
@@ -53,6 +54,8 @@ namespace Coursework_2
                     currentBooking.CarHire = true;
                 else
                     currentBooking.CarHire = true;
+
+                booker.Store(currentBooking, workingCustomer);
 
             }
             else

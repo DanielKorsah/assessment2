@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace Coursework_2
 {
-    class BookingTracker
+    public class BookingTracker
     {
         DirectoryManager directory = DirectoryManager.Instance; //create a singleton instance for the booking tracker
         private string _path; //the location where bookings will be stored and read from
@@ -39,7 +39,7 @@ namespace Coursework_2
             set { _path = value; }
         }
 
-        void Store(Booking currentBooking, Customer currentCustomer)
+        public void Store(Booking currentBooking, Customer currentCustomer)
         {
             //<autoincrement booking ref>
             if (!File.Exists(directory.GetPath() + "BookingCount.txt")) //initialise the incrementation file for customer ref if it doesnt already exist
