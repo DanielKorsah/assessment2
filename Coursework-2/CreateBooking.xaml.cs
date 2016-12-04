@@ -55,7 +55,12 @@ namespace Coursework_2
                 else
                     currentBooking.CarHire = true;
 
-                booker.Store(currentBooking, workingCustomer);
+                booker.Store(currentBooking, workingCustomer);                              // call the Store method in the booking manager
+
+                MessageBox.Show("Your Booking reference number is: " + currentBooking.BookingRef + "\n You will need this later.");
+
+                HubPage hub = new HubPage(workingCustomer);
+                hub.Show();
 
             }
             else

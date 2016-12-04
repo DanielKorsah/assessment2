@@ -61,12 +61,12 @@ namespace Coursework_2
             }
             else //otherwise there is already a persistence file and this should determine the booking ref
             {
-                _path = directory.GetPath() + "CustCount.txt";
+                _path = directory.GetPath() + "BookingCount.txt";
                 string[] nextRef = File.ReadAllLines(_path);                                //read in file
                 foreach (string line in nextRef)                                            //for each line in the file do the following
                 {
                     string incrementRef = line;
-                    currentCustomer.CustomerRef = Int32.Parse(incrementRef);                //set customer ref to whatever number was in the file
+                    currentBooking.BookingRef = Int32.Parse(incrementRef);                //set customer ref to whatever number was in the file
                 }
                  
             }
@@ -88,9 +88,8 @@ namespace Coursework_2
                 MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
             }
 
-            currentCustomer.CustomerRef += 1; //thisis the customer ref for the next user to sign on
 
-            _path = directory.GetPath() + "CustCount.txt"; //set path for file containing customer ref persidtence
+            _path = directory.GetPath() + "BookingCount.txt"; //set path for file containing customer ref persidtence
             try //check that there is a valid file path
             {
                 using (StreamWriter refIncrementer = new StreamWriter(_path, false)) //streamwriter to overwrite to specified path
