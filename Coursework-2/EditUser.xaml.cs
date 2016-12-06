@@ -31,8 +31,7 @@ namespace Coursework_2
             editCustomer = currentCustomer;
 
             //split first and second name and set them to the corresponding text boxes for unedited values
-            string[] name= Regex.Split(editCustomer.Name, " ");
-            nameBox1.Text = name[0];
+            nameBox1.Text = Regex.Split(editCustomer.Name, " ")[0];
             nameBox2.Text = Regex.Split(editCustomer.Name, " ")[1];
 
             //split up address between seperate boxed for unedited values
@@ -60,6 +59,15 @@ namespace Coursework_2
             editCustomer.Name = nameBox1.Text + " " + nameBox2.Text;
             editCustomer.Address = addressBox1.Text + " " + addressBox2.Text + " " + cityBox.Text + " " + postBox.Text;
             //</set new name and address>
+        }
+
+        private void delButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserTracker del = UserTracker.Instance;
+            del.Delete(editCustomer);
+            MainWindow start = new MainWindow();
+            start.Show();
+            this.Close();
         }
     }
 }

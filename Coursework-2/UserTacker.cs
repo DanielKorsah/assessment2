@@ -186,7 +186,7 @@ namespace Coursework_2
                     break;
                 }
             }
-            
+
             if (match == false)
             {
                 MessageBox.Show("I don't know how you did it but you've somehow managed to enter add a booking to a customer that doesn't exist." + custString, "The fuck are you trying?", //show reason for error
@@ -214,7 +214,47 @@ namespace Coursework_2
                 }
             }
 
-            
+        }
+
+        public void Delete(Customer currentCustomer)
+        {
+            bool match = false;                                                         //flag to allow checking if a match was found for associated customer ref
+            string updateLine = "";
+            _path = directory.GetPath() + "Customers.txt";                              //select correct file location to read
+            string custString = currentCustomer.CustomerRef.ToString();
+
+            string[] lines = File.ReadAllLines(_path);
+
+            foreach (string line in lines)                                               //for each line in the file do the following
+            {
+                if (line.Contains("Customer Ref: " + custString))
+                {
+                    updateLine = line;                                              //take line to be maipulated
+                    match = true;
+                    break;
+                }
+            }
+
+            if (match == false)
+            {
+                MessageBox.Show("I don't know how you did it but you've somehow managed to enter add a booking to a customer that doesn't exist." + custString, "The fuck are you trying?", //show reason for error
+                MessageBoxButton.OK, MessageBoxImage.Error); //have a BONK for your troubles
+            }
+            else
+            {
+                using (StreamWriter lineDelete = new StreamWriter(_path))
+                {
+                    foreach (string line in lines)                                               //for each line in the file do the following
+                    {
+                        if (!line.Contains("Customer Ref: " + custString))
+                        {
+                            lineDelete.WriteLine(line);                                     //overwrite the line being replaced
+                            break;
+                        }
+                    }
+
+                }
+            }
         }
     }
 }
