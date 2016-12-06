@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using System.Windows;
+using System.Text.RegularExpressions;
 
 namespace Coursework_2
 {
@@ -32,6 +35,24 @@ namespace Coursework_2
             HubPage hub = new HubPage(editCustomer);
             hub.Show();
             this.Close();
+
+            //split first and second name and set them to the corresponding text boxes for unedited values
+            nameBox1.Text = Regex.Split(editCustomer.Name, " ")[1];
+            nameBox2.Text = Regex.Split(editCustomer.Name, " ")[2];
+
+            //split up address between seperate boxed for unedited values
+            addressBox1.Text = Regex.Split(editCustomer.Address, " ")[1];
+            addressBox2.Text = Regex.Split(editCustomer.Address, " ")[2];
+            cityBox.Text = Regex.Split(editCustomer.Address, " ")[3];
+            postBox.Text = Regex.Split(editCustomer.Address, " ")[4];
+        }
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+            //<set new name and address>
+            editCustomer.Name = nameBox1.Text + " " + nameBox2.Text;
+            editCustomer.Address = addressBox1.Text + " " + addressBox2.Text + " " + cityBox.Text + " " + postBox.Text;
+            //</set new name and address>
         }
     }
 }
