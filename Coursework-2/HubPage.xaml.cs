@@ -31,14 +31,16 @@ namespace Coursework_2
 
         private void editCustomerButton_Click(object sender, RoutedEventArgs e)
         {
-            editBookingButton.Content = hubCust.CustBookings;
+            EditUser update = new EditUser(hubCust);
+            update.Show();
+            this.Close();
         }
 
 
         private void bookingButton_Click(object sender, RoutedEventArgs e)
         {
-            CreateBooking currentBooking = new CreateBooking(hubCust);
-            currentBooking.Show();
+            CreateBooking makeBooking = new CreateBooking(hubCust);
+            makeBooking.Show();
             this.Close();
         }
 

@@ -66,7 +66,7 @@ namespace Coursework_2
                 foreach (string line in refFile)                                            //for each line in the file do the following
                 {
                     string incrementRef = line;
-                    currentBooking.BookingRef = Int32.Parse(incrementRef);                //set customer ref to whatever number was in the file
+                    currentBooking.BookingRef = Int32.Parse(incrementRef);                  //set customer ref to whatever number was in the file
                 }
                  
             }
@@ -79,7 +79,8 @@ namespace Coursework_2
                 {
                     //print in format [booking_id, customer_id, arrival_date, departure_date, diet_requirements, breakfast, meals, car_hire]
                     userTable.WriteLine("Booking Ref: " + currentBooking.BookingRef + ", Customer: " + currentCustomer.CustomerRef + ", aDate: " + currentBooking.ArrivalDate + ", dDate: " + currentBooking.DepartureDate + ", " + 
-                        currentBooking.Diet + ", " + currentBooking.Breakfast + ", " + currentBooking.Meals + ", " + currentBooking.CarHire); 
+                        currentBooking.Diet + ", " + currentBooking.Breakfast + ", " + currentBooking.Meals + ", " + currentBooking.CarHire);
+                    MessageBox.Show(currentBooking.Breakfast.ToString());
                 }
             }
             catch (Exception e) //if no valid path (i.e. path = null) give a bonk error

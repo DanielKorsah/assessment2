@@ -13,6 +13,7 @@ namespace Coursework_2
         private string name;
         private string passport;
         private int age;
+        private int booking;
 
 
         public string Name
@@ -31,6 +32,12 @@ namespace Coursework_2
         {
             get { return age; }
             set { age = value; }
+        }
+
+        public int Booking
+        {
+            get { return booking; }
+            set { booking = value; }
         }
     }
 }

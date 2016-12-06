@@ -66,6 +66,7 @@ namespace Coursework_2
 
                 HubPage hub = new HubPage(workingCustomer);
                 hub.Show();
+                this.Close();
 
             }
             else

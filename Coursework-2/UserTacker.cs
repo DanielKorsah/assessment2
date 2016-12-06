@@ -161,6 +161,13 @@ namespace Coursework_2
         }
         //</lookup user and get properties based on user reference number>
 
+
+        public void EditCustomer()
+        {
+
+        }
+
+
         public void AddBooking(Booking thisBooking, Customer currentCustomer)
         {
             bool match = false;                                                         //flag to allow checking if a match was found for associated customer ref
