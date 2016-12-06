@@ -27,7 +27,19 @@ namespace Coursework_2
         public EditUser(Customer currentCustomer)
         {
             InitializeComponent();
+
             editCustomer = currentCustomer;
+
+            //split first and second name and set them to the corresponding text boxes for unedited values
+            string[] name= Regex.Split(editCustomer.Name, " ");
+            nameBox1.Text = name[0];
+            nameBox2.Text = Regex.Split(editCustomer.Name, " ")[1];
+
+            //split up address between seperate boxed for unedited values
+            addressBox1.Text = Regex.Split(editCustomer.Address, " ")[0];
+            addressBox2.Text = Regex.Split(editCustomer.Address, " ")[1];
+            cityBox.Text = Regex.Split(editCustomer.Address, " ")[2];
+            postBox.Text = Regex.Split(editCustomer.Address, " ")[3];
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
@@ -35,16 +47,11 @@ namespace Coursework_2
             HubPage hub = new HubPage(editCustomer);
             hub.Show();
             this.Close();
+        }
 
-            //split first and second name and set them to the corresponding text boxes for unedited values
-            nameBox1.Text = Regex.Split(editCustomer.Name, " ")[1];
-            nameBox2.Text = Regex.Split(editCustomer.Name, " ")[2];
-
-            //split up address between seperate boxed for unedited values
-            addressBox1.Text = Regex.Split(editCustomer.Address, " ")[1];
-            addressBox2.Text = Regex.Split(editCustomer.Address, " ")[2];
-            cityBox.Text = Regex.Split(editCustomer.Address, " ")[3];
-            postBox.Text = Regex.Split(editCustomer.Address, " ")[4];
+        protected virtual void OnLoad(EventArgs e)
+        {
+            
         }
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
