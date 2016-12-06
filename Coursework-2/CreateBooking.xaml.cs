@@ -19,7 +19,8 @@ namespace Coursework_2
     /// </summary>
     public partial class CreateBooking : Window
     {
-        Customer workingCustomer = null;
+        Customer workingCustomer;
+
         public CreateBooking(Customer hubCust)
         {
             InitializeComponent();
@@ -47,17 +48,21 @@ namespace Coursework_2
                 if (mealsBox.IsChecked == true)
                     currentBooking.Meals = true;
                 else
-                    currentBooking.Meals = true;
+                    currentBooking.Meals = false;
 
                 //check if extra: hire car is selected
                 if (carBox.IsChecked == true)
                     currentBooking.CarHire = true;
                 else
-                    currentBooking.CarHire = true;
+                    currentBooking.CarHire = false;
 
                 booker.Store(currentBooking, workingCustomer);                              // call the Store method in the booking manager
 
-                MessageBox.Show("Your Booking reference number is: " + currentBooking.BookingRef + "\n You will need this later.");
+                MessageBox.Show("Your Booking reference number is: " + (currentBooking.BookingRef - 1) + "\n You will need this later.");
+
+                
+                UserTracker addBooking = UserTracker.Instance;
+                addBooking.AddBooking(currentBooking, workingCustomer);
 
                 HubPage hub = new HubPage(workingCustomer);
                 hub.Show();
@@ -72,6 +77,9 @@ namespace Coursework_2
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
+
+
+
             HubPage hub = new HubPage(workingCustomer);
             hub.Show();
             this.Close();

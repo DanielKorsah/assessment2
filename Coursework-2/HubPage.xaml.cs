@@ -25,12 +25,13 @@ namespace Coursework_2
         {
             InitializeComponent();
             hubCust = currentCustomer; //assign values in currentCustomer to hubCust to allow the button clicks to use it
+            
         }
 
 
         private void editCustomerButton_Click(object sender, RoutedEventArgs e)
         {
-
+            editBookingButton.Content = hubCust.CustBookings;
         }
 
 

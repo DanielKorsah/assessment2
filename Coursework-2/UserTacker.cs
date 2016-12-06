@@ -13,7 +13,7 @@ namespace Coursework_2
     {
         DirectoryManager directory = DirectoryManager.Instance; //create a singleton object for the directory manager
         private string _path; //the location where users' gubbins will be stored and read from
-        
+
 
         //<singletonify it>
         private static UserTracker instance; //only reference to UserTracker object
@@ -24,7 +24,7 @@ namespace Coursework_2
         {
             get
             {
-                if(instance == null) //if this is the first call (i.e. instance is not null)
+                if (instance == null) //if this is the first call (i.e. instance is not null)
                 {
                     instance = new UserTracker(); //instanciate the object
                 }
@@ -69,7 +69,7 @@ namespace Coursework_2
                     string incrementRef = line;
                     currentCustomer.CustomerRef = Int32.Parse(incrementRef);                         //set customer ref to whatever number was in the file
                 }
-                 
+
             }
             //<autoincrement customer ref>
 
@@ -87,7 +87,7 @@ namespace Coursework_2
                 MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
             }
 
-            
+
 
             _path = directory.GetPath() + "CustCount.txt"; //set path for file containing customer ref persistence
             try //check that there is a valid file path
@@ -104,7 +104,7 @@ namespace Coursework_2
                 MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
                 MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
             }
-            
+
         }
 
 
@@ -127,7 +127,7 @@ namespace Coursework_2
                     currentCustomer.CustomerRef = Int32.Parse(refComponents[1]);        //turn string into int and apply to current customer reference number
                     //</get customer ref number>
 
-                    match = true;                                                       
+                    match = true;
                     currentCustomer.Name = words[1];                                    //second word is ALWAYS name
 
                     //<compose address>
@@ -146,7 +146,7 @@ namespace Coursework_2
                     {
                         string bookingString = words[i];
                         int _bookingRef = Int32.Parse(bookingString); //convert string to int
-                        currentCustomer.AddCustBookings(_bookingRef); //load list of booking reference numbers associated with this customer into memory one at a time
+                        currentCustomer.AddCustBookings(_bookingRef); //load list of booking reference numbers associated with this customer into list one at a time
                     }
                     //<identify bookings linked to this customer
 
@@ -156,9 +156,58 @@ namespace Coursework_2
             if (match == false)
             {
                 MessageBox.Show("The customer reference number you entered was not recognised. Go back and sign in.", "User not found.", //show reason for error
-                MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
+                MessageBoxButton.OK, MessageBoxImage.Error); //whip out a BONK and an X
             }
         }
         //</lookup user and get properties based on user reference number>
+
+        public void AddBooking(Booking thisBooking, Customer currentCustomer)
+        {
+            bool match = false;                                                         //flag to allow checking if a match was found for associated customer ref
+            string updateLine = "";
+            _path = directory.GetPath() + "Customers.txt";                              //select correct file location to read
+            string custString = currentCustomer.CustomerRef.ToString();
+
+            string[] lines = File.ReadAllLines(_path);
+
+            foreach (string line in lines)                                               //for each line in the file do the following
+            {
+                if (line.Contains("Customer Ref: " + custString))
+                {
+                    updateLine = line;                                              //take line to be maipulated
+                    match = true;
+                    break;
+                }
+            }
+            
+            if (match == false)
+            {
+                MessageBox.Show("I don't know how you did it but you've somehow managed to enter add a booking to a customer that doesn't exist." + custString, "The fuck are you trying?", //show reason for error
+                MessageBoxButton.OK, MessageBoxImage.Error); //have a BONK for your troubles
+            }
+            else
+            {
+                using (StreamWriter lineDelete = new StreamWriter(_path))
+                {
+                    foreach (string line in lines)                                               //for each line in the file do the following
+                    {
+                        if (!line.Contains("Customer Ref: " + custString))
+                        {
+                            lineDelete.WriteLine(line);                                     //overwrite the line being replaced
+                            break;
+                        }
+                    }
+
+                }
+
+                currentCustomer.AddCustBookings(thisBooking.BookingRef);        //add a refnumber for this booking to a list of all bookings associated with this booking in the loaded customer 
+                using (StreamWriter append = File.AppendText(_path))
+                {
+                    append.WriteLine(updateLine + ", " + (thisBooking.BookingRef - 1));                        //put back the deleted line with the latest booking ref added.
+                }
+            }
+
+            
+        }
     }
 }

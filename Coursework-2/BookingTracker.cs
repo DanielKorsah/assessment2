@@ -62,8 +62,8 @@ namespace Coursework_2
             else //otherwise there is already a persistence file and this should determine the booking ref
             {
                 _path = directory.GetPath() + "BookingCount.txt";
-                string[] nextRef = File.ReadAllLines(_path);                                //read in file
-                foreach (string line in nextRef)                                            //for each line in the file do the following
+                string[] refFile = File.ReadAllLines(_path);                                //read in file
+                foreach (string line in refFile)                                            //for each line in the file do the following
                 {
                     string incrementRef = line;
                     currentBooking.BookingRef = Int32.Parse(incrementRef);                //set customer ref to whatever number was in the file
