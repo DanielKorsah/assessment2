@@ -39,10 +39,11 @@ namespace Coursework_2
             set { _path = value; }
         }
 
-        public void Store(Customer currentCustomer) //a method to store each customer in a text file along with their gubbins and auto-increment their customer ref
-        {
 
-            //<autoincrement customer ref>
+        public void IncrementCount()
+        {
+            int custCount = 0;
+
             if (!File.Exists(directory.GetPath() + "CustCount.txt")) //initialise the incrementation file for customer ref if it doesnt already exist
             {
                 _path = directory.GetPath() + "CustCount.txt"; //new path for file containing customer ref persidtence
@@ -51,7 +52,6 @@ namespace Coursework_2
                     using (StreamWriter refIncrementer = new StreamWriter(_path, false)) //streamwriter to overwrite to specified path
                     {
                         refIncrementer.WriteLine(1); //print customer ref for next customer to be stored
-                        currentCustomer.CustomerRef = 1;
                     }
                 }
                 catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
@@ -67,18 +67,44 @@ namespace Coursework_2
                 foreach (string line in nextRef)                                        //for each line in the file do the following
                 {
                     string incrementRef = line;
-                    currentCustomer.CustomerRef = Int32.Parse(incrementRef);                         //set customer ref to whatever number was in the file
+                    custCount = Int32.Parse(incrementRef);                         //set customer ref to whatever number was in the file
                 }
 
+                using (StreamWriter refIncrementer = new StreamWriter(_path, false)) //streamwriter to overwrite to specified path
+                {
+                    refIncrementer.WriteLine(custCount + 1); //print customer ref for next customer to be stored
+                }
             }
-            //<autoincrement customer ref>
+        }
+
+        public void Store(Customer currentCustomer) //a method to store each customer in a text file along with their gubbins and auto-increment their customer ref
+        {
+            int custCount = 0;
+
+            _path = directory.GetPath() + "CustCount.txt";
+            try
+            {
+                
+                string[] nextRef = File.ReadAllLines(_path);                               //read in file
+                foreach (string line in nextRef)                                        //for each line in the file do the following
+                {
+                    string reference = line;
+                    custCount = Int32.Parse(reference);                         //set customer ref to whatever number was in the file
+                }
+
+                currentCustomer.CustomerRef = custCount;
+            }
+            catch
+            {
+                MessageBox.Show("I done fucked up");
+            }
 
             _path = directory.GetPath() + "Customers.txt"; //set path for full customer persistence file
             try //check that there is a valid file path
             {
                 using (StreamWriter userTable = File.AppendText(_path)) //have a stream writer to append the line of gubbins to a file at the location in path
                 {
-                    userTable.WriteLine("Customer Ref: " + currentCustomer.CustomerRef + ", " + currentCustomer.Name + " " + currentCustomer.Address); //the gubbins being printed in format [id, name, address]
+                    userTable.WriteLine("Customer Ref: " + currentCustomer.CustomerRef + ", " + currentCustomer.Name + ", " + currentCustomer.Address); //the gubbins being printed in format [id, name, address]
                 }
             }
             catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
@@ -86,26 +112,10 @@ namespace Coursework_2
                 MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
                 MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
             }
-
-
-
-            _path = directory.GetPath() + "CustCount.txt"; //set path for file containing customer ref persistence
-            try //check that there is a valid file path
-            {
-                using (StreamWriter refIncrementer = new StreamWriter(_path, false)) //streamwriter to overwrite to specified path
-                {
-                    int incrementer = currentCustomer.CustomerRef += 1; //temporary - this is the customer ref for the next user to sign on
-                    refIncrementer.WriteLine(incrementer); //print customer ref for next customer to be stored
-                }
-
-            }
-            catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
-            {
-                MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
-                MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
-            }
-
+            
         }
+
+
 
 
         //<lookup user and get properties based on user reference number>
@@ -162,18 +172,13 @@ namespace Coursework_2
         //</lookup user and get properties based on user reference number>
 
 
-        public void EditCustomer()
+        public void EditCustomer(Customer currentCustomer)
         {
 
-        }
-
-
-        public void AddBooking(Booking thisBooking, Customer currentCustomer)
-        {
             bool match = false;                                                         //flag to allow checking if a match was found for associated customer ref
             string updateLine = "";
             _path = directory.GetPath() + "Customers.txt";                              //select correct file location to read
-            string custString = currentCustomer.CustomerRef.ToString();
+            string custString = (currentCustomer.CustomerRef).ToString();
 
             string[] lines = File.ReadAllLines(_path);
 
@@ -189,7 +194,63 @@ namespace Coursework_2
 
             if (match == false)
             {
-                MessageBox.Show("I don't know how you did it but you've somehow managed to enter add a booking to a customer that doesn't exist." + custString, "The fuck are you trying?", //show reason for error
+                MessageBox.Show("I don't know how you did it but you've somehow managed to edit a customer that doesn't exist." + custString.ToString(), "The fuck are you trying?", //reason for error
+                MessageBoxButton.OK, MessageBoxImage.Error); //have a BONK for BEING a maverick
+            }
+            else
+            {
+                using (StreamWriter lineDelete = new StreamWriter(_path))
+                {
+                    foreach (string line in lines)                                               //for each line in the file do the following
+                    {
+                        if (!line.Contains("Customer Ref: " + custString))
+                        {
+                            lineDelete.WriteLine(line);                                     //overwrite the line being replaced
+                            break;
+                        }
+                    }
+
+                }
+
+                _path = directory.GetPath() + "Customers.txt"; //set path for full customer persistence file
+                try //check that there is a valid file path
+                {
+                    using (StreamWriter userTable = File.AppendText(_path)) //have a stream writer to append the line of gubbins to a file at the location in path
+                    {
+                        userTable.WriteLine("Customer Ref: " + (currentCustomer.CustomerRef) + ", " + currentCustomer.Name + ", " + currentCustomer.Address + ", " + currentCustomer.CustBookings); //the gubbins being printed in format [id, name, address]
+                    }
+                }
+                catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
+                {
+                    MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
+                    MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
+                }
+            }
+        }
+
+
+        public void AddBooking(Booking thisBooking, Customer currentCustomer)
+        {
+            bool match = false;                                                         //flag to allow checking if a match was found for associated customer ref
+            string updateLine = "";
+            _path = directory.GetPath() + "Customers.txt";                              //select correct file location to read
+            string custString = (currentCustomer.CustomerRef).ToString();
+
+            string[] lines = File.ReadAllLines(_path);
+
+            foreach (string line in lines)                                               //for each line in the file do the following
+            {
+                if (line.Contains("Customer Ref: " + custString))
+                {
+                    updateLine = line;                                              //take line to be maipulated
+                    match = true;
+                    break;
+                }
+            }
+
+            if (match == false)
+            {
+                MessageBox.Show("I don't know how you did it but you've somehow managed to enter add a booking to a customer that doesn't exist. " + custString, "The fuck are you trying?", //show reason for error
                 MessageBoxButton.OK, MessageBoxImage.Error); //have a BONK for your troubles
             }
             else
@@ -210,11 +271,13 @@ namespace Coursework_2
                 currentCustomer.AddCustBookings(thisBooking.BookingRef);        //add a refnumber for this booking to a list of all bookings associated with this booking in the loaded customer 
                 using (StreamWriter append = File.AppendText(_path))
                 {
-                    append.WriteLine(updateLine + ", " + (thisBooking.BookingRef - 1));                        //put back the deleted line with the latest booking ref added.
+                    append.WriteLine(updateLine + ", " + (thisBooking.BookingRef));                        //put back the deleted line with the latest booking ref added.
                 }
             }
 
         }
+
+
 
         public void Delete(Customer currentCustomer)
         {
@@ -237,7 +300,7 @@ namespace Coursework_2
 
             if (match == false)
             {
-                MessageBox.Show("I don't know how you did it but you've somehow managed to enter add a booking to a customer that doesn't exist." + custString, "The fuck are you trying?", //show reason for error
+                MessageBox.Show("I don't know how you did it but you've somehow managed to enter add a booking to a customer that doesn't exist. " + custString, "The fuck are you trying?", //show reason for error
                 MessageBoxButton.OK, MessageBoxImage.Error); //have a BONK for your troubles
             }
             else

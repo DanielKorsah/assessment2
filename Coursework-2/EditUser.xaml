@@ -20,7 +20,7 @@
         <Label x:Name="label2" Content="City " HorizontalAlignment="Left" Margin="28,168,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.649,0.774"/>
         <Label x:Name="label3" Content="Post Code" HorizontalAlignment="Left" Margin="28,199,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Button x:Name="saveButton" Content="Save Changes" HorizontalAlignment="Left" Margin="338,261,0,0" VerticalAlignment="Top" Width="120" Height="40" Click="saveButton_Click"/>
-        <Button x:Name="delButton" Content="DELETE ACCOUNT" HorizontalAlignment="Left" Margin="28,245,0,0" VerticalAlignment="Top" Width="109" Background="#FFFD0000" Click="delButton_Click"/>
+        <Button x:Name="delButton" Content="DELETE ACCOUNT" HorizontalAlignment="Left" Margin="28,245,0,0" VerticalAlignment="Top" Width="109" Background="#FFFD0000" Click="delButton_Click" FontWeight="Bold"/>
 
     </Grid>
 </Window>

@@ -47,7 +47,7 @@ namespace Coursework_2
 
         public Customer(string name1, string name2, string address1, string address2, string city, string postCode) //read arguments from window to construct Customer
         {
-            name = name1 + " " + name2 + ", "; //Make name a single string, extra comma for correct formatting when printed to .csv file
+            name = name1 + " " + name2; //Make name a single string, extra comma for correct formatting when printed to .csv file
             address = address1 + ", " + address2 + ", " + city + ", " + postCode; //construct a singe line address from constituant parts
 
         }

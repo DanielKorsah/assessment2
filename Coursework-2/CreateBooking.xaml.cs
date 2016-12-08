@@ -58,7 +58,7 @@ namespace Coursework_2
 
                 booker.Store(currentBooking, workingCustomer);                              // call the Store method in the booking manager
 
-                MessageBox.Show("Your Booking reference number is: " + (currentBooking.BookingRef - 1) + "\n You will need this later.");
+                MessageBox.Show("Your Booking reference number is: " + (currentBooking.BookingRef) + "\n You will need this later.");
 
                 
                 UserTracker addBooking = UserTracker.Instance;

@@ -35,10 +35,12 @@ namespace Coursework_2
             nameBox2.Text = Regex.Split(editCustomer.Name, " ")[1];
 
             //split up address between seperate boxed for unedited values
-            addressBox1.Text = Regex.Split(editCustomer.Address, " ")[0];
-            addressBox2.Text = Regex.Split(editCustomer.Address, " ")[1];
-            cityBox.Text = Regex.Split(editCustomer.Address, " ")[2];
-            postBox.Text = Regex.Split(editCustomer.Address, " ")[3];
+            MessageBox.Show((editCustomer.CustomerRef - 1).ToString());
+            MessageBox.Show(editCustomer.Address);
+            addressBox1.Text = Regex.Split(editCustomer.Address, ", ")[0];
+            addressBox2.Text = Regex.Split(editCustomer.Address, ", ")[1];
+            cityBox.Text = Regex.Split(editCustomer.Address, ", ")[2];
+            postBox.Text = Regex.Split(editCustomer.Address, ", ")[3];
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
@@ -57,8 +59,14 @@ namespace Coursework_2
         {
             //<set new name and address>
             editCustomer.Name = nameBox1.Text + " " + nameBox2.Text;
-            editCustomer.Address = addressBox1.Text + " " + addressBox2.Text + " " + cityBox.Text + " " + postBox.Text;
+            editCustomer.Address = addressBox1.Text + ", " + addressBox2.Text + ", " + cityBox.Text + ", " + postBox.Text;
             //</set new name and address>
+
+            UserTracker update = UserTracker.Instance;
+            update.EditCustomer(editCustomer);
+            HubPage hub = new HubPage(editCustomer);
+            hub.Show();
+            this.Close();
         }
 
         private void delButton_Click(object sender, RoutedEventArgs e)
