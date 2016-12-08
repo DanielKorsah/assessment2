@@ -9,7 +9,8 @@ using System.Text.RegularExpressions;
 
 namespace Coursework_2
 {
-    public class UserTracker //class to store and retrieve details from any user based on userId - Singleton pattern
+    public class UserTracker    //class to store and retrieve details from any user based on userId - Singleton pattern
+                                //I know you're going to judge me for using text files instead of JSON or XML. Believe me I've learned from my mistakes
     {
         DirectoryManager directory = DirectoryManager.Instance; //create a singleton object for the directory manager
         private string _path; //the location where users' gubbins will be stored and read from
@@ -178,7 +179,7 @@ namespace Coursework_2
             bool match = false;                                                         //flag to allow checking if a match was found for associated customer ref
             string updateLine = "";
             _path = directory.GetPath() + "Customers.txt";                              //select correct file location to read
-            string custString = (currentCustomer.CustomerRef).ToString();
+            string custString = currentCustomer.CustomerRef.ToString();
 
             string[] lines = File.ReadAllLines(_path);
 
@@ -194,7 +195,7 @@ namespace Coursework_2
 
             if (match == false)
             {
-                MessageBox.Show("I don't know how you did it but you've somehow managed to edit a customer that doesn't exist." + custString.ToString(), "The fuck are you trying?", //reason for error
+                MessageBox.Show("I don't know how you did it but you've somehow managed to edit a customer that doesn't exist." + String.Join(", ", currentCustomer.CustBookings), "The fuck are you trying?", //reason for error
                 MessageBoxButton.OK, MessageBoxImage.Error); //have a BONK for BEING a maverick
             }
             else
@@ -206,7 +207,6 @@ namespace Coursework_2
                         if (!line.Contains("Customer Ref: " + custString))
                         {
                             lineDelete.WriteLine(line);                                     //overwrite the line being replaced
-                            break;
                         }
                     }
 
@@ -217,7 +217,7 @@ namespace Coursework_2
                 {
                     using (StreamWriter userTable = File.AppendText(_path)) //have a stream writer to append the line of gubbins to a file at the location in path
                     {
-                        userTable.WriteLine("Customer Ref: " + (currentCustomer.CustomerRef) + ", " + currentCustomer.Name + ", " + currentCustomer.Address + ", " + currentCustomer.CustBookings); //the gubbins being printed in format [id, name, address]
+                        userTable.WriteLine("Customer Ref: " + (currentCustomer.CustomerRef) + ", " + currentCustomer.Name + ", " + currentCustomer.Address + ", " + String.Join(", ", currentCustomer.CustBookings)); //the gubbins being printed in format [id, name, address]
                     }
                 }
                 catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
@@ -259,10 +259,9 @@ namespace Coursework_2
                 {
                     foreach (string line in lines)                                               //for each line in the file do the following
                     {
-                        if (!line.Contains("Customer Ref: " + custString))
+                        if (line.Contains(updateLine))
                         {
                             lineDelete.WriteLine(line);                                     //overwrite the line being replaced
-                            break;
                         }
                     }
 
@@ -309,10 +308,10 @@ namespace Coursework_2
                 {
                     foreach (string line in lines)                                               //for each line in the file do the following
                     {
+                        MessageBox.Show(custString);
                         if (!line.Contains("Customer Ref: " + custString))
                         {
                             lineDelete.WriteLine(line);                                     //overwrite the line being replaced
-                            break;
                         }
                     }
 

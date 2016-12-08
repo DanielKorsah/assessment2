@@ -35,7 +35,7 @@ namespace Coursework_2
             nameBox2.Text = Regex.Split(editCustomer.Name, " ")[1];
 
             //split up address between seperate boxed for unedited values
-            MessageBox.Show((editCustomer.CustomerRef - 1).ToString());
+            MessageBox.Show((editCustomer.CustomerRef).ToString());
             MessageBox.Show(editCustomer.Address);
             addressBox1.Text = Regex.Split(editCustomer.Address, ", ")[0];
             addressBox2.Text = Regex.Split(editCustomer.Address, ", ")[1];
