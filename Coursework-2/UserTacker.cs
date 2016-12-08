@@ -200,30 +200,20 @@ namespace Coursework_2
             }
             else
             {
-                using (StreamWriter lineDelete = new StreamWriter(_path))
+                using (StreamWriter lineEdit = new StreamWriter(_path))
                 {
                     foreach (string line in lines)                                               //for each line in the file do the following
                     {
                         if (!line.Contains("Customer Ref: " + custString))
                         {
-                            lineDelete.WriteLine(line);                                     //overwrite the line being replaced
+                            lineEdit.WriteLine(line);                                     //overwrite the line being replaced
+                        }
+                        else
+                        {
+                            lineEdit.WriteLine("Customer Ref: " + (currentCustomer.CustomerRef) + ", " + currentCustomer.Name + ", " + currentCustomer.Address + ", " + String.Join(", ", currentCustomer.CustBookings)); //the gubbins being printed in format [id, name, address]
                         }
                     }
 
-                }
-
-                _path = directory.GetPath() + "Customers.txt"; //set path for full customer persistence file
-                try //check that there is a valid file path
-                {
-                    using (StreamWriter userTable = File.AppendText(_path)) //have a stream writer to append the line of gubbins to a file at the location in path
-                    {
-                        userTable.WriteLine("Customer Ref: " + (currentCustomer.CustomerRef) + ", " + currentCustomer.Name + ", " + currentCustomer.Address + ", " + String.Join(", ", currentCustomer.CustBookings)); //the gubbins being printed in format [id, name, address]
-                    }
-                }
-                catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
-                {
-                    MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
-                    MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
                 }
             }
         }
@@ -259,7 +249,7 @@ namespace Coursework_2
                 {
                     foreach (string line in lines)                                               //for each line in the file do the following
                     {
-                        if (line.Contains(updateLine))
+                        if (!line.Contains("Customer Ref: " + custString))
                         {
                             lineDelete.WriteLine(line);                                     //overwrite the line being replaced
                         }
