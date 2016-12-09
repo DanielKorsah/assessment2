@@ -156,6 +156,7 @@ namespace Coursework_2
                     for (int i = 6; i < words.Length; i++) //any words after this are booking reference numbers for bookings made by this customer, load them nto memory
                     {
                         string bookingString = words[i];
+                        MessageBox.Show(words[i]);
                         int _bookingRef = Int32.Parse(bookingString); //convert string to int
                         currentCustomer.AddCustBookings(_bookingRef); //load list of booking reference numbers associated with this customer into list one at a time
                     }
@@ -289,7 +290,7 @@ namespace Coursework_2
 
             if (match == false)
             {
-                MessageBox.Show("I don't know how you did it but you've somehow managed to enter add a booking to a customer that doesn't exist. " + custString, "The fuck are you trying?", //show reason for error
+                MessageBox.Show("I don't know how you did it but you've somehow managed to enter a booking to a customer that doesn't exist. " + custString, "The fuck are you trying?", //show reason for error
                 MessageBoxButton.OK, MessageBoxImage.Error); //have a BONK for your troubles
             }
             else

@@ -30,13 +30,14 @@ namespace Coursework_2
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            if (inDatePick.SelectedDate.Value.Date != null && outDatePick.SelectedDate.Value.Date != null)
+            if (inDatePick.SelectedDate.Value.Date != null && outDatePick.SelectedDate.Value.Date != null) //make sure a null date can't be entered
             {
                 Booking currentBooking = new Booking();                                     //instanciate current booking
                 BookingTracker booker = BookingTracker.Instance;
                 currentBooking.ArrivalDate = inDatePick.SelectedDate.Value.Date;            //set arrival dat eto chosen datepicker vaule
                 currentBooking.DepartureDate = outDatePick.SelectedDate.Value.Date;         //ditto for departure date
                 currentBooking.Diet = dietBox.Text;                                         //diet requirements get set
+                
 
                 //check if extra: breakfast is selected                                     //please forgive lack of brakets but this part is insanely long for what it is with them
                 if (breakfastBox.IsChecked == true)
@@ -56,8 +57,23 @@ namespace Coursework_2
                 else
                     currentBooking.CarHire = false;
 
-                booker.Store(currentBooking, workingCustomer);                              // call the Store method in the booking manager
+                //make sure that null values never end up being attempted to be printed for the car hire fields
+                if (carBox.IsChecked == false)
+                {
+                    currentBooking.DriverName = "N/A";
+                    currentBooking.HireStart = Convert.ToDateTime("00/00/0000");
+                    currentBooking.HireEnd = Convert.ToDateTime("00/00/0000");
+                }
+                else
+                {
+                    currentBooking.DriverName = driverNameBox.Text;
+                    currentBooking.HireStart = driveDay1Picker.SelectedDate.Value.Date;
+                    currentBooking.HireEnd = driveDay2Picker.SelectedDate.Value.Date;
+                }
 
+                booker.Store(currentBooking, workingCustomer);                              // call the Store method in the booking manager
+                
+                
                 MessageBox.Show("Your Booking reference number is: " + (currentBooking.BookingRef) + "\n You will need this later.");
 
                 
@@ -78,12 +94,25 @@ namespace Coursework_2
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-
-
-
             HubPage hub = new HubPage(workingCustomer);
             hub.Show();
             this.Close();
+        }
+
+        private void carBox_Click(object sender, RoutedEventArgs e)
+        {
+            if(carBox.IsChecked == false) //if checkbox unchecked change to false and disable care hire inputs and vice versa
+            {
+                driverNameBox.IsEnabled = false;
+                driveDay1Picker.IsEnabled = false;
+                driveDay2Picker.IsEnabled = false;
+            }
+            else
+            {
+                driverNameBox.IsEnabled = true;
+                driveDay1Picker.IsEnabled = true;
+                driveDay2Picker.IsEnabled = true;
+            }
         }
     }
 }

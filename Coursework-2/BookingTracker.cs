@@ -86,9 +86,8 @@ namespace Coursework_2
                 using (StreamWriter userTable = File.AppendText(_path)) //have a stream writer to append the line of gubbins to a file at the location in path
                 {
                     //print in format [booking_id, customer_id, arrival_date, departure_date, diet_requirements, breakfast, meals, car_hire]
-                    userTable.WriteLine("Booking Ref: " + currentBooking.BookingRef + ", Customer: " + currentCustomer.CustomerRef + ", aDate: " + currentBooking.ArrivalDate + ", dDate: " + currentBooking.DepartureDate + ", " + 
-                        currentBooking.Diet + ", " + currentBooking.Breakfast + ", " + currentBooking.Meals + ", " + currentBooking.CarHire);
-                    MessageBox.Show(currentBooking.Breakfast.ToString());
+                    userTable.WriteLine("Booking Ref: " + currentBooking.BookingRef + ", Customer: " + currentCustomer.CustomerRef + ", aDate: " + currentBooking.ArrivalDate + ", dDate: " + currentBooking.DepartureDate + ", " +
+                        currentBooking.Diet + ", " + currentBooking.Breakfast + ", " + currentBooking.Meals + ", " + currentBooking.CarHire + ", " + currentBooking.DriverName + ", " + currentBooking.HireStart + ", " + currentBooking.HireEnd + ", " + String.Join(", ", currentBooking.GuestList));
                 }
             }
             catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
@@ -113,6 +112,120 @@ namespace Coursework_2
                 MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
                 MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
             }
+        }
+
+        public void ReadBooking(Booking currentBooking, int id)
+        {
+            string searchId = id.ToString();
+
+            bool match = false;                                                         //flag to allow checking if a match was found for the entered booking ref
+            _path = directory.GetPath() + "Bookings.txt";                              //select correct file location to read
+            string[] lines = File.ReadAllLines(_path);                                  //read in file
+            foreach (string line in lines)                                               //for each line in the file do the following
+            {
+                if (line.Contains("Booking Ref: " + searchId))                         //execute if line contains customer reference number, marked different from booking refs by preceding text
+                {
+                    string[] words = Regex.Split(line, ", ");                           //split line into individual parts
+
+                    //<get booking ref number>
+                    string[] bookRefComponents = Regex.Split(words[0], ": ");               //split split customer ref num from it's marker text
+                    string customerRefString;                                           //intermediate string to represent customer ref num
+                    customerRefString = bookRefComponents[1];                               //first word is ALWAYS booking reference number
+                    currentBooking.BookingRef = Int32.Parse(bookRefComponents[1]);        //turn string into int and apply to current booking reference number
+                    //</get booking ref number>
+                    match = true;
+
+                    //IGNORE SECOND INDEX second word (words[1]) is ALWAYS reference number of the customer who made it
+
+                    //<get stay times>
+                    string[] dateComponents = Regex.Split(words[2], ": "); //third index holds a string and the datetime for arrival
+                    currentBooking.ArrivalDate = Convert.ToDateTime(dateComponents[1]);
+
+                    dateComponents = Regex.Split(words[3], ": "); //4th index holds a string and the datetime for departure
+                    currentBooking.DepartureDate = Convert.ToDateTime(dateComponents[1]);
+                    //</get stay times>
+
+                    currentBooking.Diet = words[4]; //5th index is diet requirements
+
+                    currentBooking.Breakfast = Convert.ToBoolean(words[5]);
+                    MessageBox.Show(currentBooking.Breakfast.ToString());
+
+                    currentBooking.Meals = Convert.ToBoolean(words[6]);
+
+                    currentBooking.CarHire = Convert.ToBoolean(words[7]);
+
+                    currentBooking.DriverName = words[8];
+
+                    currentBooking.HireStart = Convert.ToDateTime(words[9]);
+
+                    currentBooking.HireEnd = Convert.ToDateTime(words[10]);
+                    
+                    //<identify bookings linked to customer>
+                    for (int i = 11; i < words.Length; i++)
+                    {
+                        MessageBox.Show(words[i]);
+                        Guest nextGuest = new Guest(words[i]);          //pass in a guestNumber starting at 1
+                        currentBooking.AddToList(nextGuest);
+                    }
+                    //<identify bookings linked to this customer
+
+                    break; //stop loop for efficiency after we've found what we need
+                }
+            }
+            if (match == false)
+            {
+                MessageBox.Show("The customer reference number you entered was not recognised. Go back and sign in.", "User not found.", //show reason for error
+                MessageBoxButton.OK, MessageBoxImage.Error); //whip out a BONK and an X
+            }
+        }
+
+
+
+        public void Edit()
+        {
+
+        }
+
+        public void Delete(Customer currentCustomer, int booking)
+        {
+
+            bool match = false;                                                         //flag to allow checking if a match was found for associated customer ref
+            string updateLine = "";
+            _path = directory.GetPath() + "Bookings.txt";                              //select correct file location to read
+
+            string[] lines = File.ReadAllLines(_path);
+
+            foreach (string line in lines)                                               //for each line in the file do the following
+            {
+                if (line.Contains("Booking Ref: " + booking))
+                {
+                    updateLine = line;                                              //take line to be maipulated
+                    match = true;
+                    break;
+                }
+            }
+
+            if (match == false)
+            {
+                MessageBox.Show("Trying to delete a booking which does not exist. " + booking, "The fuck are you trying?", //show reason for error
+                MessageBoxButton.OK, MessageBoxImage.Error); //have a BONK for your troubles
+            }
+            else
+            {
+                using (StreamWriter lineDelete = new StreamWriter(_path))
+                {
+                    foreach (string line in lines)                                               //for each line in the file do the following
+                    {
+                        MessageBox.Show(booking.ToString());
+                        if (!line.Contains("Booking Ref: " + booking))
+                        {
+                            lineDelete.WriteLine(line);                                     //overwrite the line being replaced
+                        }
+                    }
+
+                }
+            }
+
         }
 
     }

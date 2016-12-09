@@ -24,6 +24,9 @@ namespace Coursework_2
         private bool breakfast;
         private bool meals;                                     //the dietary requirements associated with breakfast and/or evening meals - must be present if meals or breakfast are requested
         private bool carHire;
+        private string driverName;
+        private DateTime hireStart;
+        private DateTime hireEnd;
         //</optional extras>
 
         public DateTime ArrivalDate     //accessor to get/set start date of the booking
@@ -66,11 +69,28 @@ namespace Coursework_2
             get { return diet; }
             set { diet = value; }
         }
+        public string DriverName
+        {
+            get { return driverName; }
+            set { driverName = value; }
+        }
 
         public bool CarHire //accessor for carHire boolean
         {
             get { return carHire; }
             set { carHire = value; }
+        }
+
+        public DateTime HireStart
+        {
+            get { return hireStart; }
+            set { hireStart = value; }
+        }
+
+        public DateTime HireEnd
+        {
+            get { return hireEnd; }
+            set { hireEnd = value; }
         }
 
 

@@ -34,5 +34,42 @@ namespace Coursework_2
             hub.Show();
             this.Close();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void carBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void loadButton_Click(object sender, RoutedEventArgs e)
+        {
+            Booking currentBooking = new Booking();
+            BookingTracker loader = BookingTracker.Instance;
+            int id = Int32.Parse(lookupBox.Text);
+            loader.ReadBooking(currentBooking, id);
+
+            inDatePick.SelectedDate = currentBooking.ArrivalDate;
+            outDatePick.SelectedDate = currentBooking.DepartureDate;
+            dietBox.Text = currentBooking.Diet;
+
+            if (currentBooking.Breakfast == true)
+                breakfastBox.IsChecked = true;
+            else
+                breakfastBox.IsChecked = false;
+
+            if (currentBooking.Meals == true)
+                mealsBox.IsChecked = true;
+            else
+                breakfastBox.IsChecked = false;
+
+            if (currentBooking.CarHire == true)
+                carHireBox.IsChecked = true;
+            else
+                carHireBox.IsChecked = false;
+        }
     }
 }

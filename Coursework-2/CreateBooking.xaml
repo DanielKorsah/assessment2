@@ -14,14 +14,14 @@
         <Button x:Name="button" Content="Confirm" HorizontalAlignment="Left" Margin="55,297,0,0" VerticalAlignment="Top" Width="147" Click="button_Click"/>
         <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.267,-0.545" Click="backButton_Click"/>
         <Label x:Name="label2" Content="End Date*" HorizontalAlignment="Left" Margin="48,75,0,0" VerticalAlignment="Top" Width="66"/>
-        <TextBox x:Name="dietBox" HorizontalAlignment="Left" Height="45" Margin="187,115,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="166"/>
+        <TextBox x:Name="dietBox" HorizontalAlignment="Left" Height="45" Margin="187,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166"/>
         <Label x:Name="label1" Content="Diet Requirements" HorizontalAlignment="Left" Margin="48,111,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="breakfastBox" Content="Breakfast" HorizontalAlignment="Left" Margin="55,167,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="mealsBox" Content="Meals" HorizontalAlignment="Left" Margin="55,194,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="carBox" Content="Car Hire" HorizontalAlignment="Left" Margin="55,224,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="driverNameBox" HorizontalAlignment="Left" Height="23" Margin="187,222,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="132"/>
-        <DatePicker x:Name="driveDay1Picker" HorizontalAlignment="Left" Margin="346,221,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="driveDay2Picker" HorizontalAlignment="Left" Margin="463,221,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="carBox" Content="Car Hire" HorizontalAlignment="Left" Margin="55,224,0,0" VerticalAlignment="Top" Click="carBox_Click"/>
+        <TextBox x:Name="driverNameBox" HorizontalAlignment="Left" Height="23" Margin="187,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" IsEnabled="False"/>
+        <DatePicker x:Name="driveDay1Picker" HorizontalAlignment="Left" Margin="346,221,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+        <DatePicker x:Name="driveDay2Picker" HorizontalAlignment="Left" Margin="463,221,0,0" VerticalAlignment="Top" IsEnabled="False"/>
         <Label x:Name="label3" Content="There are guests on this booking" HorizontalAlignment="Left" Margin="187,253,0,0" VerticalAlignment="Top"/>
         <Button x:Name="addGuestButton" Content="Add Guest" HorizontalAlignment="Left" Margin="55,256,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>

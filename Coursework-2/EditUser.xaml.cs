@@ -35,8 +35,6 @@ namespace Coursework_2
             nameBox2.Text = Regex.Split(editCustomer.Name, " ")[1];
 
             //split up address between seperate boxed for unedited values
-            MessageBox.Show((editCustomer.CustomerRef).ToString());
-            MessageBox.Show(editCustomer.Address);
             addressBox1.Text = Regex.Split(editCustomer.Address, ", ")[0];
             addressBox2.Text = Regex.Split(editCustomer.Address, ", ")[1];
             cityBox.Text = Regex.Split(editCustomer.Address, ", ")[2];
@@ -69,6 +67,7 @@ namespace Coursework_2
             this.Close();
         }
 
+        //delete a Customer and return to start page
         private void delButton_Click(object sender, RoutedEventArgs e)
         {
             UserTracker del = UserTracker.Instance;
