@@ -26,18 +26,18 @@ namespace Coursework_2
             InitializeComponent();
             workingCustomer = hubCust;
         }
-        
+
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            if (inDatePick.SelectedDate.Value.Date != null && outDatePick.SelectedDate.Value.Date != null) //make sure a null date can't be entered
+            try
             {
                 Booking currentBooking = new Booking();                                     //instanciate current booking
                 BookingTracker booker = BookingTracker.Instance;
                 currentBooking.ArrivalDate = inDatePick.SelectedDate.Value.Date;            //set arrival dat eto chosen datepicker vaule
                 currentBooking.DepartureDate = outDatePick.SelectedDate.Value.Date;         //ditto for departure date
                 currentBooking.Diet = dietBox.Text;                                         //diet requirements get set
-                
+
 
                 //check if extra: breakfast is selected                                     //please forgive lack of brakets but this part is insanely long for what it is with them
                 if (breakfastBox.IsChecked == true)
@@ -61,8 +61,8 @@ namespace Coursework_2
                 if (carBox.IsChecked == false)
                 {
                     currentBooking.DriverName = "N/A";
-                    currentBooking.HireStart = Convert.ToDateTime("00/00/0000");
-                    currentBooking.HireEnd = Convert.ToDateTime("00/00/0000");
+                    currentBooking.HireStart = DateTime.MinValue;
+                    currentBooking.HireEnd = DateTime.MinValue;
                 }
                 else
                 {
@@ -71,12 +71,13 @@ namespace Coursework_2
                     currentBooking.HireEnd = driveDay2Picker.SelectedDate.Value.Date;
                 }
 
+                booker.IncrementCount();                                                    //increment the 
                 booker.Store(currentBooking, workingCustomer);                              // call the Store method in the booking manager
-                
-                
+
+
                 MessageBox.Show("Your Booking reference number is: " + (currentBooking.BookingRef) + "\n You will need this later.");
 
-                
+
                 UserTracker addBooking = UserTracker.Instance;
                 addBooking.AddBooking(currentBooking, workingCustomer);
 
@@ -84,13 +85,15 @@ namespace Coursework_2
                 hub.Show();
                 this.Close();
 
+
             }
-            else
+            catch 
             {
-                MessageBox.Show("You must enter fill out all compulsory(*) fields!", "Missing data.", // reason for error
-                MessageBoxButton.OK, MessageBoxImage.Error); //give 'em a BONK 
+                MessageBox.Show("You must enter data in all compulsory (*) fields.", "Missing data.", // reason for error
+                     MessageBoxButton.OK, MessageBoxImage.Error); //give 'em a BONK 
             }
         }
+
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {

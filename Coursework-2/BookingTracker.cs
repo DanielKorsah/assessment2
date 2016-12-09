@@ -82,7 +82,7 @@ namespace Coursework_2
         {
             int bookingCount = 0;
 
-            _path = directory.GetPath() + "CustCount.txt";
+            _path = directory.GetPath() + "BookingCount.txt";
             try
             {
 
@@ -93,7 +93,7 @@ namespace Coursework_2
                     bookingCount = Int32.Parse(reference);                         //set customer ref to whatever number was in the file
                 }
 
-                currentCustomer.CustomerRef = bookingCount;
+                currentBooking.BookingRef = bookingCount;
             }
             catch
             {
@@ -116,23 +116,7 @@ namespace Coursework_2
                 MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
                 MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
             }
-
-
-            _path = directory.GetPath() + "BookingCount.txt"; //set path for file containing customer ref persidtence
-            try //check that there is a valid file path
-            {
-                using (StreamWriter refIncrementer = new StreamWriter(_path, false)) //streamwriter to overwrite to specified path
-                {
-                    int incrementer = currentBooking.BookingRef += 1;
-                    refIncrementer.WriteLine(incrementer); //print customer ref for next customer to be stored
-                }
-
-            }
-            catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
-            {
-                MessageBox.Show("There is no valid drive to write to!", "No valid drive.", //show reason for error
-                MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
-            }
+            
         }
 
         public void ReadBooking(Booking currentBooking, int id)
@@ -150,8 +134,8 @@ namespace Coursework_2
 
                     //<get booking ref number>
                     string[] bookRefComponents = Regex.Split(words[0], ": ");               //split split customer ref num from it's marker text
-                    string customerRefString;                                           //intermediate string to represent customer ref num
-                    customerRefString = bookRefComponents[1];                               //first word is ALWAYS booking reference number
+                    string bookingRefString;                                           //intermediate string to represent customer ref num
+                    bookingRefString = bookRefComponents[1];                               //first word is ALWAYS booking reference number
                     currentBooking.BookingRef = Int32.Parse(bookRefComponents[1]);        //turn string into int and apply to current booking reference number
                     //</get booking ref number>
                     match = true;
@@ -203,9 +187,49 @@ namespace Coursework_2
 
 
 
-        public void Edit()
+        public void Edit(Booking currentBooking, Customer currentCustomer)
         {
+            bool match = false;                                                         //flag to allow checking if a match was found for associated booking ref
+            string updateLine = "";
+            _path = directory.GetPath() + "Bookings.txt";                              //select correct file location to read
+            string bookString = currentBooking.BookingRef.ToString();
 
+            string[] lines = File.ReadAllLines(_path);
+
+            foreach (string line in lines)                                               //for each line in the file do the following
+            {
+                if (line.Contains("Booking Ref: " + bookString))
+                {
+                    updateLine = line;                                              //take line to be manipulated
+                    match = true;
+                    break;
+                }
+            }
+
+            if (match == false)
+            {
+                MessageBox.Show("I don't know how you did it but you've somehow managed to edit a booking that doesn't exist." + String.Join(", ", currentBooking.BookingRef), "The fuck are you trying?", //reason for error
+                MessageBoxButton.OK, MessageBoxImage.Error); //have a BONK for BEING a maverick
+            }
+            else
+            {
+                using (StreamWriter lineEdit = new StreamWriter(_path))
+                {
+                    foreach (string line in lines)                                               //for each line in the file do the following
+                    {
+                        if (!line.Contains("Booking Ref: " + bookString))                           //if line not a match overwrite it with itself, otherwise overwrite with new data
+                        {
+                            lineEdit.WriteLine(line);                                    
+                        }
+                        else
+                        {
+                            lineEdit.WriteLine("Booking Ref: " + currentBooking.BookingRef + ", Customer: " + currentCustomer.CustomerRef + ", aDate: " + currentBooking.ArrivalDate + ", dDate: " + currentBooking.DepartureDate + ", " +
+                        currentBooking.Diet + ", " + currentBooking.Breakfast + ", " + currentBooking.Meals + ", " + currentBooking.CarHire + ", " + currentBooking.DriverName + ", " + currentBooking.HireStart + ", " + currentBooking.HireEnd + ", " + String.Join(", ", currentBooking.GuestList));
+                        }
+                    }
+
+                }
+            }
         }
 
         public void Delete(Customer currentCustomer, int booking)

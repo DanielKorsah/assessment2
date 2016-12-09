@@ -18,7 +18,6 @@ namespace Coursework_2
         private int age;
         private int booking;        //booking ref of booking that the guest was applied to
         private int guestNumber; //number indicating the position in the list of 4 guest allowed on each booking
-        private int guestKey; //unique id for each and ever guest
 
         public Guest(string index)
         {

@@ -19,26 +19,27 @@ namespace Coursework_2
     /// </summary>
     public partial class EditBooking : Window
     {
-        private Customer customer;
+        private Customer currentCustomer;
         private Booking currentBooking = new Booking();
 
-        public EditBooking(Customer customer)
+        public EditBooking(Customer customer)//pass in consistent customer
         {
             InitializeComponent();
-            this.customer = customer;
+            this.currentCustomer = customer;
             bookingListLable.Content = bookingListLable.Content + " " + String.Join(", ", customer.CustBookings);
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            HubPage hub = new HubPage(customer);
+            HubPage hub = new HubPage(currentCustomer);
             hub.Show();
             this.Close();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-
+            BookingTracker editor = BookingTracker.Instance;
+            editor.Edit(currentBooking, currentCustomer);
         }
 
 
@@ -104,6 +105,13 @@ namespace Coursework_2
                 driveDay1Picker.IsEnabled = true;
                 driveDay2Picker.IsEnabled = true;
             }
+        }
+
+        private void delButton_Click(object sender, RoutedEventArgs e)
+        {
+            int bookingId = Int32.Parse(lookupBox.Text);
+            BookingTracker del = BookingTracker.Instance;
+            del.Delete(currentCustomer, bookingId);
         }
     }
 }

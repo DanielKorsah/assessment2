@@ -157,7 +157,6 @@ namespace Coursework_2
                     for (int i = 6; i < words.Length; i++) //any words after this are booking reference numbers for bookings made by this customer, load them nto memory
                     {
                         string bookingString = words[i];
-                        MessageBox.Show(words[i]);
                         int _bookingRef = Int32.Parse(bookingString); //convert string to int
                         currentCustomer.AddCustBookings(_bookingRef); //load list of booking reference numbers associated with this customer into list one at a time
                     }
