@@ -87,7 +87,15 @@ namespace Coursework_2
                 driveDay2Picker.SelectedDate = currentBooking.HireEnd;
             }
 
-            
+            GuestTracker guestLoader = GuestTracker.Instance;
+            guestLoader.Read(currentBooking, id);
+
+            foreach(Guest printG in currentBooking.GuestList)
+            {
+                guestsBox.Text +="Passport: " + printG.Passport + ", Name: " + printG.Name + ", Age: " + printG.Age + "\n";
+            }
+
+
 
         }
 
@@ -112,6 +120,29 @@ namespace Coursework_2
             int bookingId = Int32.Parse(lookupBox.Text);
             BookingTracker del = BookingTracker.Instance;
             del.Delete(currentCustomer, bookingId);
+        }
+
+        private void addGuestButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentBooking.GuestList.Count < 4)
+            {
+                Guest nextGuest = new Guest();
+                AddGuest addGuest = new AddGuest(ref nextGuest, ref currentBooking); //pass by ref because we need it to change the values without having to pass it back
+                addGuest.ShowDialog();
+
+                //print the last added guest to the guestsbox in correct format - note user does not need to see booking ref
+                guestsBox.Text += "Passport: " + nextGuest.Passport + ", Name: " + nextGuest.Name + ", Age: " + nextGuest.Age + "\n";
+            }
+            else
+            {
+                MessageBox.Show("You may only have 4 guests on a booking.", "Too many Guests.", // reason for error
+                     MessageBoxButton.OK, MessageBoxImage.Error); //give 'em a BONK 
+            }
+        }
+
+        private void delGuestButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

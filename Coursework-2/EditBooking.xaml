@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Coursework_2"
         mc:Ignorable="d"
         Language="en-GB"
-        Title="EditBooking" Height="466.922" Width="617.275">
+        Title="EditBooking" Height="613.922" Width="617.275">
     <Grid>
         <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="backButton_Click"/>
         <Label x:Name="bookingListLable" Content="Your bookings are: " HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
@@ -15,20 +15,22 @@
         <DatePicker x:Name="inDatePick" HorizontalAlignment="Left" Margin="187,113,0,0" VerticalAlignment="Top" Height="27"/>
         <DatePicker x:Name="outDatePick" HorizontalAlignment="Left" Margin="187,148,0,0" VerticalAlignment="Top" Height="27"/>
         <Label x:Name="label_Copy" Content="Start Date*" HorizontalAlignment="Left" Margin="48,112,0,0" VerticalAlignment="Top" Width="66" Height="29"/>
-        <Button x:Name="button" Content="Confirm" HorizontalAlignment="Left" Margin="55,390,0,0" VerticalAlignment="Top" Width="147" Click="button_Click" Height="22"/>
+        <Button x:Name="button" Content="Confirm" HorizontalAlignment="Left" Margin="55,536,0,0" VerticalAlignment="Top" Width="147" Click="button_Click" Height="22"/>
         <Label x:Name="label2" Content="End Date*" HorizontalAlignment="Left" Margin="48,147,0,0" VerticalAlignment="Top" Width="66" Height="29"/>
         <TextBox x:Name="dietBox" HorizontalAlignment="Left" Height="50" Margin="187,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166"/>
         <Label x:Name="label1" Content="Diet Requirements" HorizontalAlignment="Left" Margin="48,187,0,0" VerticalAlignment="Top" Height="27"/>
         <CheckBox x:Name="breakfastBox" Content="Breakfast" HorizontalAlignment="Left" Margin="55,248,0,0" VerticalAlignment="Top" Height="16"/>
         <CheckBox x:Name="mealsBox" Content="Meals" HorizontalAlignment="Left" Margin="55,277,0,0" VerticalAlignment="Top" Height="16"/>
-        <TextBox x:Name="driverNameBox" HorizontalAlignment="Left" Height="25" Margin="187,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" IsEnabled="False"/>
+        <TextBox x:Name="driverNameBox" HorizontalAlignment="Left" Height="25" Margin="187,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" IsEnabled="False"/>
         <DatePicker x:Name="driveDay1Picker" HorizontalAlignment="Left" Margin="346,306,0,0" VerticalAlignment="Top" IsEnabled="False" Height="27"/>
         <DatePicker x:Name="driveDay2Picker" HorizontalAlignment="Left" Margin="463,306,0,0" VerticalAlignment="Top" IsEnabled="False" Height="27"/>
-        <Label x:Name="label3" Content="There are guests on this booking" HorizontalAlignment="Left" Margin="187,342,0,0" VerticalAlignment="Top" Height="28"/>
-        <Button x:Name="addGuestButton" Content="Add Guest" HorizontalAlignment="Left" Margin="55,345,0,0" VerticalAlignment="Top" Width="75" Height="21"/>
+        <Button x:Name="addGuestButton" Content="Add Guest" HorizontalAlignment="Left" Margin="55,365,0,0" VerticalAlignment="Top" Width="75" Height="21" Click="addGuestButton_Click"/>
         <Button x:Name="loadButton" Content="Load" HorizontalAlignment="Left" Margin="293,81,0,0" VerticalAlignment="Top" Width="44" Click="loadButton_Click"/>
         <CheckBox x:Name="carHireBox" Content="Car Hire" HorizontalAlignment="Left" Margin="55,311,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,6.267" Click="carHireBox_Click"/>
-        <Button x:Name="delButton" Content="DELETE BOOKING" HorizontalAlignment="Left" Margin="485,345,0,0" VerticalAlignment="Top" Width="114" Background="#FFF50808" FontWeight="Bold" Click="delButton_Click"/>
+        <Button x:Name="delButton" Content="DELETE BOOKING" HorizontalAlignment="Left" Margin="451,536,0,0" VerticalAlignment="Top" Width="114" Background="#FFF50808" FontWeight="Bold" Click="delButton_Click"/>
+        <Label x:Name="label3_Copy" Content="Below are the guests on this booking" HorizontalAlignment="Left" Margin="55,391,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="guestsBox" HorizontalAlignment="Left" Height="92" Margin="55,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" IsManipulationEnabled="True"/>
+        <Button x:Name="delGuestButton" Content="Delete Guest" HorizontalAlignment="Left" Margin="135,364,0,0" VerticalAlignment="Top" Width="75" Click="delGuestButton_Click"/>
 
     </Grid>
 </Window>

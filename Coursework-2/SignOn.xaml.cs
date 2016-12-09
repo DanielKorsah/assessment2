@@ -27,6 +27,7 @@ namespace Coursework_2
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //<take strings from UI>
+            
             string name1 = nameBox.Text;
             string name2 = nameBox2.Text;
             string address1 = addressBox1.Text;
@@ -35,17 +36,26 @@ namespace Coursework_2
             string postCode = addressBox4.Text;
             //</take strings from UI>
 
-            Customer currentCustomer = new Customer(name1, name2, address1, address2, city, postCode); //pass Customer details to Customer constructor
-            UserTracker tracker = UserTracker.Instance; //return the only instance of UserTracker
-
-            tracker.IncrementCount();
-            tracker.Store(currentCustomer);
-
-            HubPage hub = new HubPage(currentCustomer);
-            if (tracker._Path != null) //if the details were successfully printed to the a valid file path
+            if (string.IsNullOrEmpty(name1) == false && string.IsNullOrEmpty(name2) == false && string.IsNullOrEmpty(address1) == false  && string.IsNullOrEmpty(city) == false && string.IsNullOrEmpty(postCode) == false)
             {
-                hub.Show(); //on with the show go to the hub page
-                this.Close();
+                Customer currentCustomer = new Customer(name1, name2, address1, address2, city, postCode); //pass Customer details to Customer constructor
+                UserTracker tracker = UserTracker.Instance; //return the only instance of UserTracker
+
+                tracker.IncrementCount();
+                tracker.Store(currentCustomer);
+                MessageBox.Show("Your Customer reference number is " + currentCustomer.CustomerRef + ".\nYou will need this every time you log in."); //tell customer their ref number
+
+                HubPage hub = new HubPage(currentCustomer);
+                if (tracker._Path != null) //if the details were successfully printed to the a valid file path
+                {
+                    hub.Show(); //on with the show go to the hub page
+                    this.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("All compulsory fields (*) must be filled.", "Missing data.", // reason for error
+                     MessageBoxButton.OK, MessageBoxImage.Error); //give 'em a BONK 
             }
         }
 

@@ -76,7 +76,7 @@ namespace Coursework_2
 
 
                 GuestTracker gPrint = GuestTracker.Instance;
-                
+                gPrint.Store(currentBooking);                                               //write guests from the list in booking to a file 
 
 
                 MessageBox.Show("Your Booking reference number is: " + (currentBooking.BookingRef) + "\n You will need this later.");
@@ -129,11 +129,14 @@ namespace Coursework_2
                 Guest nextGuest = new Guest();
                 AddGuest addGuest = new AddGuest(ref nextGuest, ref currentBooking); //pass by ref because we need it to change the values without having to pass it back
                 addGuest.ShowDialog();
-                foreach(Guest printG in currentBooking.GuestList)
-                {
-                    guestsBox.Text +="Passport: " + printG.Passport + ", Name: " + printG.Name + ", Age: " + printG.Age;
-                }
-                
+
+                //print the last added guest to the guestsbox in correct format - note user does not need to see booking ref
+                guestsBox.Text += "Passport: " + nextGuest.Passport + ", Name: " + nextGuest.Name + ", Age: " + nextGuest.Age + "\n"; 
+            }
+            else
+            {
+                MessageBox.Show("You may only have 4 guests on a booking.", "Too many Guests.", // reason for error
+                     MessageBoxButton.OK, MessageBoxImage.Error); //give 'em a BONK 
             }
         }
     }

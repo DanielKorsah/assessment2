@@ -9,18 +9,38 @@ using System.Text.RegularExpressions;
 
 namespace Coursework_2
 {
-    class GuestTracker
+    class GuestTracker //singleton class to manage IO operations for Guests
     {
         private string path;
         DirectoryManager dm = DirectoryManager.Instance;
 
-        public void Write(Booking currentBooking)
+        //<singletonify it>
+        private static GuestTracker instance; //only reference to GuestTracker object
+
+        private GuestTracker() { } //set to private so it can't be called
+
+        public static GuestTracker Instance
+        {
+            get
+            {
+                if (instance == null) //if this is the first call (i.e. instance is not null)
+                {
+                    instance = new GuestTracker(); //instanciate the object
+                }
+                return instance; //else return instance (null)
+            }
+        }
+        //</singletonify it>
+
+
+
+        public void Store(Booking currentBooking)
         {
             
             path = dm.GetPath() + "Guests.txt";
             try
             {
-                using (StreamWriter guestPrinter = new StreamWriter(path, false)) //streamwriter to overwrite to specified path
+                using (StreamWriter guestPrinter = new StreamWriter(path, true)) //streamwriter to append to specified path
                 {
                     foreach (Guest printG in currentBooking.GuestList)
                     {
@@ -36,14 +56,14 @@ namespace Coursework_2
         }
 
         
-        public void Read(Booking currentBooking)
+        public void Read(Booking currentBooking, int searchId)
         {
             path = dm.GetPath() + "Guests.txt";                                         //get path to file
             string[] lines = File.ReadAllLines(path);                                   //read all lines into an array
 
             foreach (string line in lines)
             {
-                if(line.Contains("Booking: " + currentBooking.BookingRef))              //on any line which contains the reference number for this booking do the following
+                if(line.Contains("Booking: " + searchId))              //on any line which contains the reference number for this booking do the following
                 {
                     Guest liftGuest = new Guest();
                     string[] properties = Regex.Split(line, ", ");      //split the line into distinct parts to be assigned to properties of a guest
