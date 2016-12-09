@@ -47,7 +47,9 @@ namespace Coursework_2
 
         private void editBookingButton_Click(object sender, RoutedEventArgs e)
         {
-
+            EditBooking editBooking = new EditBooking(hubCust);
+            editBooking.Show();
+            this.Close();
         }
 
         private void logOutButton_Click(object sender, RoutedEventArgs e) //go back to the start page

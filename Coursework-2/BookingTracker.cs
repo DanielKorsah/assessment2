@@ -39,9 +39,11 @@ namespace Coursework_2
             set { _path = value; }
         }
 
-        public void Store(Booking currentBooking, Customer currentCustomer)
+
+        public void IncrementCount()
         {
-            //<autoincrement booking ref>
+            int bookingCount = 0;
+
             if (!File.Exists(directory.GetPath() + "BookingCount.txt")) //initialise the incrementation file for customer ref if it doesnt already exist
             {
                 _path = directory.GetPath() + "BookingCount.txt"; //new path for file containing customer ref persidtence
@@ -50,7 +52,6 @@ namespace Coursework_2
                     using (StreamWriter refIncrementer = new StreamWriter(_path, false)) //streamwriter to overwrite to specified path
                     {
                         refIncrementer.WriteLine(1); //print customer ref for next customer to be stored
-                        currentBooking.BookingRef = 1;
                     }
                 }
                 catch (Exception e) //if no valid path (i.e. path = null) give a bonk error
@@ -59,19 +60,26 @@ namespace Coursework_2
                     MessageBoxButton.OK, MessageBoxImage.Error); //give it the BONK noise and big fuck-off red X
                 }
             }
-            else //otherwise there is already a persistence file and this should determine the booking ref
+            else //otherwise there is already a persistence file and this should determine the customer ref
             {
                 _path = directory.GetPath() + "BookingCount.txt";
-                string[] refFile = File.ReadAllLines(_path);                                //read in file
-                foreach (string line in refFile)                                            //for each line in the file do the following
+                string[] nextRef = File.ReadAllLines(_path);                               //read in file
+                foreach (string line in nextRef)                                        //for each line in the file do the following
                 {
                     string incrementRef = line;
-                    currentBooking.BookingRef = Int32.Parse(incrementRef);                  //set customer ref to whatever number was in the file
+                    bookingCount = Int32.Parse(incrementRef);                         //set customer ref to whatever number was in the file
                 }
-                 
-            }
-            //</autoincrement booking ref>
 
+                using (StreamWriter refIncrementer = new StreamWriter(_path, false)) //streamwriter to overwrite to specified path
+                {
+                    refIncrementer.WriteLine(bookingCount + 1); //print customer ref for next customer to be stored
+                }
+            }
+        }
+
+
+        public void Store(Booking currentBooking, Customer currentCustomer)
+        {
             _path = directory.GetPath() + "Bookings.txt"; //set path for full customer persistence file
             try //check that there is a valid file path
             {

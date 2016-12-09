@@ -58,6 +58,9 @@
       <DependentUpon>CreateBooking.xaml</DependentUpon>
     </Compile>
     <Compile Include="Directory Manager.cs" />
+    <Compile Include="EditBooking.xaml.cs">
+      <DependentUpon>EditBooking.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditUser.xaml.cs">
       <DependentUpon>EditUser.xaml</DependentUpon>
     </Compile>
@@ -72,6 +75,10 @@
     </Compile>
     <Compile Include="UserTacker.cs" />
     <Page Include="CreateBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditBooking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
