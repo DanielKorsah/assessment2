@@ -77,5 +77,44 @@ namespace Coursework_2
             }
 
         }
+
+        public void Delete(Booking currentBooking, string passNum)
+        {
+
+            bool match = false;                                                         //flag to allow checking if a match was found for associated customer ref
+            string updateLine = "";
+            path = dm.GetPath() + "Guests.txt";                              //select correct file location to read
+
+            string[] lines = File.ReadAllLines(path);
+
+            foreach (string line in lines)                                               //for each line in the file do the following
+            {
+                if (line.Contains("Booking: " + currentBooking.BookingRef) && line.Contains(passNum))
+                {
+                    updateLine = line;                                              //take line to be maipulated
+                    match = true;
+                    break;
+                }
+            }
+            if (match == false)
+            {
+                MessageBox.Show("Trying to delete a Guest which does not exist. " + passNum, "The fuck are you trying?", //show reason for error
+                MessageBoxButton.OK, MessageBoxImage.Error); //have a BONK for your troubles
+            }
+            else
+            {
+                using (StreamWriter lineDelete = new StreamWriter(path))
+                {
+                    foreach (string line in lines)                                               //for each line in the file do the following
+                    {
+                        if (!line.Contains(passNum))
+                        {
+                            lineDelete.WriteLine(line);                                     //overwrite the line being replaced
+                        }
+                    }
+
+                }
+            }
+        }
     }
 }

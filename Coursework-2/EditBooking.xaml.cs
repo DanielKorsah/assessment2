@@ -142,7 +142,8 @@ namespace Coursework_2
 
         private void delGuestButton_Click(object sender, RoutedEventArgs e)
         {
-
+            delGuest del = new delGuest(ref currentBooking);
+            del.Show();
         }
     }
 }

@@ -245,12 +245,11 @@ namespace Coursework_2
             {
                 if (line.Contains("Booking Ref: " + booking))
                 {
-                    updateLine = line;                                              //take line to be maipulated
+                    updateLine = line;                                              //del line
                     match = true;
                     break;
                 }
             }
-
             if (match == false)
             {
                 MessageBox.Show("Trying to delete a booking which does not exist. " + booking, "The fuck are you trying?", //show reason for error
@@ -265,7 +264,7 @@ namespace Coursework_2
                         MessageBox.Show(booking.ToString());
                         if (!line.Contains("Booking Ref: " + booking))
                         {
-                            lineDelete.WriteLine(line);                                     //overwrite the line being replaced
+                            lineDelete.WriteLine(line);                                     //overwrite each line with itself
                         }
                     }
 

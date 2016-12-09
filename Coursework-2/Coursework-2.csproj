@@ -60,6 +60,9 @@
     <Compile Include="CreateBooking.xaml.cs">
       <DependentUpon>CreateBooking.xaml</DependentUpon>
     </Compile>
+    <Compile Include="delGuest.xaml.cs">
+      <DependentUpon>delGuest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Directory Manager.cs" />
     <Compile Include="EditBooking.xaml.cs">
       <DependentUpon>EditBooking.xaml</DependentUpon>
@@ -86,6 +89,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="delGuest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
