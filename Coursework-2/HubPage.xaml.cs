@@ -58,5 +58,12 @@ namespace Coursework_2
             startPage.Show();
             this.Close();
         }
+
+        private void invoiceButton_Click(object sender, RoutedEventArgs e)
+        {
+            InvoicePage invoice = new InvoicePage(hubCust);
+            invoice.Show();
+            this.Close();
+        }
     }
 }

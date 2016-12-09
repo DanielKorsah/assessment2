@@ -11,6 +11,7 @@
         <Button x:Name="bookingButton" Content="Make Your Booking" HorizontalAlignment="Left" Margin="180,103,0,0" VerticalAlignment="Top" Width="120" Height="86" Click="bookingButton_Click"/>
         <Button x:Name="editBookingButton" Content="Edit Booking" HorizontalAlignment="Left" Margin="320,103,0,0" VerticalAlignment="Top" Width="120" Height="86" Click="editBookingButton_Click"/>
         <Button x:Name="logOutButton" Content="Log Out" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" Width="75" Click="logOutButton_Click"/>
+        <Button x:Name="invoiceButton" Content="Gt an Invoice" HorizontalAlignment="Left" Margin="180,204,0,0" VerticalAlignment="Top" Width="120" Height="86" Click="invoiceButton_Click"/>
 
     </Grid>
 </Window>

@@ -97,7 +97,8 @@ namespace Coursework_2
             }
             catch
             {
-                MessageBox.Show("I done fucked up");
+                MessageBox.Show("Number from the file could not be parsed. You've beenmessing around in the file to break it. That's cheating.", "Missing Ref Number Incrementer.", //show reason for error
+                MessageBoxButton.OK, MessageBoxImage.Error); //BONK
             }
 
             _path = directory.GetPath() + "Customers.txt"; //set path for full customer persistence file

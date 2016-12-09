@@ -20,6 +20,7 @@ namespace Coursework_2
     public partial class EditBooking : Window
     {
         private Customer customer;
+        private Booking currentBooking = new Booking();
 
         public EditBooking(Customer customer)
         {
@@ -40,14 +41,11 @@ namespace Coursework_2
 
         }
 
-        private void carBox_Checked(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void loadButton_Click(object sender, RoutedEventArgs e)
         {
-            Booking currentBooking = new Booking();
+
             BookingTracker loader = BookingTracker.Instance;
             int id = Int32.Parse(lookupBox.Text);
             loader.ReadBooking(currentBooking, id);
@@ -70,6 +68,42 @@ namespace Coursework_2
                 carHireBox.IsChecked = true;
             else
                 carHireBox.IsChecked = false;
+
+            if (carHireBox.IsChecked == false) //if checkbox unchecked change to false and disable care hire inputs and vice versa
+            {
+                driverNameBox.IsEnabled = false;
+                driveDay1Picker.IsEnabled = false;
+                driveDay2Picker.IsEnabled = false;
+            }
+            else
+            {
+                driverNameBox.IsEnabled = true;
+                driveDay1Picker.IsEnabled = true;
+                driveDay2Picker.IsEnabled = true;
+
+                driverNameBox.Text = currentBooking.DriverName;
+                driveDay1Picker.SelectedDate = currentBooking.HireStart;
+                driveDay2Picker.SelectedDate = currentBooking.HireEnd;
+            }
+
+            
+
+        }
+
+        private void carHireBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (carHireBox.IsChecked == false) //if checkbox unchecked change to false and disable care hire inputs and vice versa
+            {
+                driverNameBox.IsEnabled = false;
+                driveDay1Picker.IsEnabled = false;
+                driveDay2Picker.IsEnabled = false;
+            }
+            else
+            {
+                driverNameBox.IsEnabled = true;
+                driveDay1Picker.IsEnabled = true;
+                driveDay2Picker.IsEnabled = true;
+            }
         }
     }
 }

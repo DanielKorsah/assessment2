@@ -80,13 +80,34 @@ namespace Coursework_2
 
         public void Store(Booking currentBooking, Customer currentCustomer)
         {
+            int bookingCount = 0;
+
+            _path = directory.GetPath() + "CustCount.txt";
+            try
+            {
+
+                string[] nextRef = File.ReadAllLines(_path);                               //read in file
+                foreach (string line in nextRef)                                        //for each line in the file do the following
+                {
+                    string reference = line;
+                    bookingCount = Int32.Parse(reference);                         //set customer ref to whatever number was in the file
+                }
+
+                currentCustomer.CustomerRef = bookingCount;
+            }
+            catch
+            {
+                MessageBox.Show("Number from the file could not be parsed. You've beenmessing around in the file to break it. That's cheating.", "Missing Ref Number Incrementer.", //show reason for error
+                MessageBoxButton.OK, MessageBoxImage.Error); //BONK
+            }
+
             _path = directory.GetPath() + "Bookings.txt"; //set path for full customer persistence file
             try //check that there is a valid file path
             {
                 using (StreamWriter userTable = File.AppendText(_path)) //have a stream writer to append the line of gubbins to a file at the location in path
                 {
                     //print in format [booking_id, customer_id, arrival_date, departure_date, diet_requirements, breakfast, meals, car_hire]
-                    userTable.WriteLine("Booking Ref: " + currentBooking.BookingRef + ", Customer: " + currentCustomer.CustomerRef + ", aDate: " + currentBooking.ArrivalDate + ", dDate: " + currentBooking.DepartureDate + ", " +
+                    userTable.WriteLine("Booking Ref: " + bookingCount + ", Customer: " + currentCustomer.CustomerRef + ", aDate: " + currentBooking.ArrivalDate + ", dDate: " + currentBooking.DepartureDate + ", " +
                         currentBooking.Diet + ", " + currentBooking.Breakfast + ", " + currentBooking.Meals + ", " + currentBooking.CarHire + ", " + currentBooking.DriverName + ", " + currentBooking.HireStart + ", " + currentBooking.HireEnd + ", " + String.Join(", ", currentBooking.GuestList));
                 }
             }
@@ -172,9 +193,10 @@ namespace Coursework_2
                     break; //stop loop for efficiency after we've found what we need
                 }
             }
+
             if (match == false)
             {
-                MessageBox.Show("The customer reference number you entered was not recognised. Go back and sign in.", "User not found.", //show reason for error
+                MessageBox.Show("The booking reference number you entered was not recognised.", "Booking not found.", //show reason for error
                 MessageBoxButton.OK, MessageBoxImage.Error); //whip out a BONK and an X
             }
         }

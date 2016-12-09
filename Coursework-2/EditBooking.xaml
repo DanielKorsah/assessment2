@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Coursework_2"
         mc:Ignorable="d"
+        Language="en-GB"
         Title="EditBooking" Height="466.922" Width="617.275">
     <Grid>
         <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="backButton_Click"/>
@@ -26,7 +27,7 @@
         <Label x:Name="label3" Content="There are guests on this booking" HorizontalAlignment="Left" Margin="187,342,0,0" VerticalAlignment="Top" Height="28"/>
         <Button x:Name="addGuestButton" Content="Add Guest" HorizontalAlignment="Left" Margin="55,345,0,0" VerticalAlignment="Top" Width="75" Height="21"/>
         <Button x:Name="loadButton" Content="Load" HorizontalAlignment="Left" Margin="293,81,0,0" VerticalAlignment="Top" Width="44" Click="loadButton_Click"/>
-        <CheckBox x:Name="carHireBox" Content="Car Hire" HorizontalAlignment="Left" Margin="55,311,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,6.267"/>
+        <CheckBox x:Name="carHireBox" Content="Car Hire" HorizontalAlignment="Left" Margin="55,311,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,6.267" Click="carHireBox_Click"/>
 
     </Grid>
 </Window>
