@@ -17,18 +17,10 @@ namespace Coursework_2
         private string passport;
         private int age;
         private int booking;        //booking ref of booking that the guest was applied to
-        private int guestNumber; //number indicating the position in the list of 4 guest allowed on each booking
 
-        public Guest(string index)
+        public Guest()
         {
-            try
-            {
-                guestNumber = Int32.Parse(index);
-            }
-            catch
-            {
-                MessageBox.Show("Error cause by not having any guests I think.");
-            }
+            
         }
 
         public string Name
@@ -55,10 +47,5 @@ namespace Coursework_2
             set { booking = value; }
         }
 
-        public int GuestNumber
-        {
-            get { return guestNumber; }
-            set {guestNumber = value; }
-        }
     }
 }

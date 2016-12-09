@@ -133,10 +133,10 @@ namespace Coursework_2
                     string[] words = Regex.Split(line, ", ");                           //split line into individual parts
 
                     //<get booking ref number>
-                    string[] bookRefComponents = Regex.Split(words[0], ": ");               //split split customer ref num from it's marker text
+                    string[] bookRefComponents = Regex.Split(words[0], ": ");               //split split booking ref num from it's marker text
                     string bookingRefString;                                           //intermediate string to represent customer ref num
                     bookingRefString = bookRefComponents[1];                               //first word is ALWAYS booking reference number
-                    currentBooking.BookingRef = Int32.Parse(bookRefComponents[1]);        //turn string into int and apply to current booking reference number
+                    currentBooking.BookingRef = Int32.Parse(bookRefComponents[1]);      //turn string into int and apply to current booking reference number
                     //</get booking ref number>
                     match = true;
 
@@ -169,7 +169,7 @@ namespace Coursework_2
                     for (int i = 11; i < words.Length; i++)
                     {
                         MessageBox.Show(words[i]);
-                        Guest nextGuest = new Guest(words[i]);          //pass in a guestNumber starting at 1
+                        Guest nextGuest = new Guest();          //pass in a guestNumber starting at 1
                         currentBooking.AddToList(nextGuest);
                     }
                     //<identify bookings linked to this customer

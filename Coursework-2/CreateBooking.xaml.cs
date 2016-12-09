@@ -19,8 +19,8 @@ namespace Coursework_2
     /// </summary>
     public partial class CreateBooking : Window
     {
-        Customer workingCustomer;
-
+        private Customer workingCustomer;
+        private Booking currentBooking = new Booking();
         public CreateBooking(Customer hubCust)
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace Coursework_2
         {
             try
             {
-                Booking currentBooking = new Booking();                                     //instanciate current booking
+                                                   //instanciate current booking
                 BookingTracker booker = BookingTracker.Instance;
                 currentBooking.ArrivalDate = inDatePick.SelectedDate.Value.Date;            //set arrival dat eto chosen datepicker vaule
                 currentBooking.DepartureDate = outDatePick.SelectedDate.Value.Date;         //ditto for departure date
@@ -75,6 +75,10 @@ namespace Coursework_2
                 booker.Store(currentBooking, workingCustomer);                              // call the Store method in the booking manager
 
 
+                GuestTracker gPrint = GuestTracker.Instance;
+                
+
+
                 MessageBox.Show("Your Booking reference number is: " + (currentBooking.BookingRef) + "\n You will need this later.");
 
 
@@ -115,6 +119,21 @@ namespace Coursework_2
                 driverNameBox.IsEnabled = true;
                 driveDay1Picker.IsEnabled = true;
                 driveDay2Picker.IsEnabled = true;
+            }
+        }
+
+        private void addGuestButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentBooking.GuestList.Count<4)
+            {
+                Guest nextGuest = new Guest();
+                AddGuest addGuest = new AddGuest(ref nextGuest, ref currentBooking); //pass by ref because we need it to change the values without having to pass it back
+                addGuest.ShowDialog();
+                foreach(Guest printG in currentBooking.GuestList)
+                {
+                    guestsBox.Text +="Passport: " + printG.Passport + ", Name: " + printG.Name + ", Age: " + printG.Age;
+                }
+                
             }
         }
     }

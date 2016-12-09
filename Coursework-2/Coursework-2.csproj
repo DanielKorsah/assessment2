@@ -53,6 +53,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddGuest.xaml.cs">
+      <DependentUpon>AddGuest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BookingTracker.cs" />
     <Compile Include="CreateBooking.xaml.cs">
       <DependentUpon>CreateBooking.xaml</DependentUpon>
@@ -78,6 +81,10 @@
       <DependentUpon>SignOn.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserTacker.cs" />
+    <Page Include="AddGuest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateBooking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
