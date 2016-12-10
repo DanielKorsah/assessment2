@@ -20,11 +20,13 @@ namespace Coursework_2
     public partial class delGuest : Window
     {
         Booking currentBooking;
+        private string passNum;
 
-        public delGuest(ref Booking currentBooking)
+        public delGuest(ref Booking currentBooking, ref string passNum)
         {
             InitializeComponent();
             this.currentBooking = currentBooking;
+            this.passNum = passNum;
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
@@ -34,9 +36,11 @@ namespace Coursework_2
 
         private void delButton_Click(object sender, RoutedEventArgs e)
         {
-            string passNum = delBox.Text;
+            passNum = delBox.Text;
             GuestTracker del = GuestTracker.Instance;
-            del.Delete(currentBooking, passNum);
+            del.Delete(currentBooking, ref passNum);
+
+            
         }
     }
 }

@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using System.Windows;
+using System.Text.RegularExpressions;
 
 namespace Coursework_2
 {
@@ -38,23 +41,26 @@ namespace Coursework_2
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            BookingTracker editor = BookingTracker.Instance;
-            editor.Edit(currentBooking, currentCustomer);
+            Facade facade = new Facade(this);
+            facade.EditBooking(currentBooking, currentCustomer);
         }
 
 
 
         private void loadButton_Click(object sender, RoutedEventArgs e)
         {
+            guestsBox.Text = "";
 
             BookingTracker loader = BookingTracker.Instance;
             int id = Int32.Parse(lookupBox.Text);
             loader.ReadBooking(currentBooking, id);
 
+            //set dates
             inDatePick.SelectedDate = currentBooking.ArrivalDate;
             outDatePick.SelectedDate = currentBooking.DepartureDate;
             dietBox.Text = currentBooking.Diet;
 
+            //these if else statements set UI elements according to the state of the parameters they correspond to
             if (currentBooking.Breakfast == true)
                 breakfastBox.IsChecked = true;
             else
@@ -70,13 +76,14 @@ namespace Coursework_2
             else
                 carHireBox.IsChecked = false;
 
-            if (carHireBox.IsChecked == false) //if checkbox unchecked change to false and disable care hire inputs and vice versa
+            //if checkbox unchecked change to false and disable care hire inputs
+            if (carHireBox.IsChecked == false) 
             {
                 driverNameBox.IsEnabled = false;
                 driveDay1Picker.IsEnabled = false;
                 driveDay2Picker.IsEnabled = false;
             }
-            else
+            else //if checkbox is checked change to true and enable care hire inputs
             {
                 driverNameBox.IsEnabled = true;
                 driveDay1Picker.IsEnabled = true;
@@ -90,13 +97,11 @@ namespace Coursework_2
             GuestTracker guestLoader = GuestTracker.Instance;
             guestLoader.Read(currentBooking, id);
 
+            //print each guest into the box to show the user which guests are in the booking
             foreach(Guest printG in currentBooking.GuestList)
             {
                 guestsBox.Text +="Passport: " + printG.Passport + ", Name: " + printG.Name + ", Age: " + printG.Age + "\n";
             }
-
-
-
         }
 
         private void carHireBox_Click(object sender, RoutedEventArgs e)
@@ -115,11 +120,17 @@ namespace Coursework_2
             }
         }
 
+        //call the BookingTracker to delte the booking
         private void delButton_Click(object sender, RoutedEventArgs e)
         {
             int bookingId = Int32.Parse(lookupBox.Text);
             BookingTracker del = BookingTracker.Instance;
             del.Delete(currentCustomer, bookingId);
+
+            HubPage hub = new HubPage(currentCustomer);
+
+            //clear the box in case they try to load a new booking which will need to put it's guests here
+            guestsBox.Text = "";
         }
 
         private void addGuestButton_Click(object sender, RoutedEventArgs e)
@@ -142,8 +153,24 @@ namespace Coursework_2
 
         private void delGuestButton_Click(object sender, RoutedEventArgs e)
         {
-            delGuest del = new delGuest(ref currentBooking);
-            del.Show();
+            
+            string passNum = "";
+            delGuest del = new delGuest(ref currentBooking, ref passNum);
+            del.ShowDialog();
+
+            string[] lines = Regex.Split(guestsBox.Text, "\n");
+            //remove all printed guests
+            guestsBox.Text = "";
+
+            //write back the ones that were not deleted
+            foreach (string line in lines)
+            {
+                if (!line.Contains(passNum))
+                {
+                    guestsBox.Text += line + "\n";
+                }
+            }
+
         }
     }
 }

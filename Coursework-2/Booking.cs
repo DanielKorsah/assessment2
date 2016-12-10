@@ -50,6 +50,7 @@ namespace Coursework_2
         public List<Guest> GuestList //accessor to retrieve list of guests
         {
             get { return guestList; }
+            set { guestList = value; }
         }
 
         public bool Breakfast //accessor to assing or retrieve unique id number for the booking

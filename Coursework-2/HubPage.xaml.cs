@@ -20,12 +20,21 @@ namespace Coursework_2
     public partial class HubPage : Window
     {
         private Customer hubCust; //customer to be assigned value of mcurrentCustomer
+        private Booking invoiceBooking;
 
         public HubPage(Customer currentCustomer)
         {
             InitializeComponent();
             hubCust = currentCustomer; //assign values in currentCustomer to hubCust to allow the button clicks to use it
             
+        }
+
+        //another constructor to allow the invoice page to acces the customers
+        public HubPage(Customer currentCustomer,ref Booking hubBooking)
+        {
+            InitializeComponent();
+            hubCust = currentCustomer; //assign values in currentCustomer to hubCust to allow the button clicks to use it;
+            invoiceBooking = hubBooking;
         }
 
 
@@ -61,7 +70,7 @@ namespace Coursework_2
 
         private void invoiceButton_Click(object sender, RoutedEventArgs e)
         {
-            InvoicePage invoice = new InvoicePage(hubCust);
+            InvoicePage invoice = new InvoicePage(hubCust, ref invoiceBooking);
             invoice.Show();
             this.Close();
         }

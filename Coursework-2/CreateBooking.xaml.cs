@@ -30,13 +30,30 @@ namespace Coursework_2
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            bool passed = true;                                                            
             try
             {
-                                                   //instanciate current booking
-                BookingTracker booker = BookingTracker.Instance;
+                                                  
+                BookingTracker booker = BookingTracker.Instance;                            //instanciate current booking
                 currentBooking.ArrivalDate = inDatePick.SelectedDate.Value.Date;            //set arrival dat eto chosen datepicker vaule
                 currentBooking.DepartureDate = outDatePick.SelectedDate.Value.Date;         //ditto for departure date
-                currentBooking.Diet = dietBox.Text;                                         //diet requirements get set
+                currentBooking.Diet = dietBox.Text;                                         //diet requirements setter
+
+                //validate for bad dates
+                try
+                {
+                    int hireLength = (currentBooking.HireEnd - currentBooking.HireStart).Days;
+                    if (Convert.ToDateTime(hireLength) <= DateTime.MinValue)
+                    {
+                        passed = false;
+                        MessageBox.Show("Make sure you get here before you leave.", "Invalid inout.", // reason for error
+                            MessageBoxButton.OK, MessageBoxImage.Error); //give 'em a BONK 
+                    }
+                }
+                catch
+                {
+                    passed = false;
+                }
 
 
                 //check if extra: breakfast is selected                                     //please forgive lack of brakets but this part is insanely long for what it is with them
@@ -85,10 +102,13 @@ namespace Coursework_2
                 UserTracker addBooking = UserTracker.Instance;
                 addBooking.AddBooking(currentBooking, workingCustomer);
 
-                HubPage hub = new HubPage(workingCustomer);
-                hub.Show();
-                this.Close();
-
+                if (passed == true)
+                {
+                    HubPage hub = new HubPage(workingCustomer);
+                    hub.Show();
+                    this.Close();
+                }
+                
 
             }
             catch 
@@ -138,6 +158,10 @@ namespace Coursework_2
                 MessageBox.Show("You may only have 4 guests on a booking.", "Too many Guests.", // reason for error
                      MessageBoxButton.OK, MessageBoxImage.Error); //give 'em a BONK 
             }
+
+            HubPage hub = new HubPage(workingCustomer, ref currentBooking);
+            hub.Show();
+            this.Close();
         }
     }
 }

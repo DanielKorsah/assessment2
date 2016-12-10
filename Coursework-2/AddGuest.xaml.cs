@@ -58,6 +58,7 @@ namespace Coursework_2
                 {
                     MessageBox.Show("All fields must be filled.", "Missiang data.", //show reason for error
                             MessageBoxButton.OK, MessageBoxImage.Error); //Punish their stupidity with a BONK
+
                 }
             }
             this.Close();

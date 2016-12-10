@@ -22,10 +22,11 @@ namespace Coursework_2
         private Customer currentCustomer;
         private Booking currentBooking;
 
-        public InvoicePage(Customer currentCustomer)
+        public InvoicePage(Customer currentCustomer, ref Booking currentBooking)
         {
             InitializeComponent();
             this.currentCustomer = currentCustomer;
+            this.currentBooking = currentBooking;
             bookingsLabel.Content += String.Join(", ", currentCustomer.CustBookings);
         }
 
@@ -69,13 +70,19 @@ namespace Coursework_2
 
                 //cost due to breakfast extra
                 if (currentBooking.Breakfast == true)
+                {
                     breakfastCost = 5 * currentBooking.GuestList.Count * stayLength;
+                }
                 else
                     breakfastCost = 0;
 
                 //cost due to evening meals
                 if (currentBooking.Meals == true)
-                    mealCost = 15 * currentBooking.GuestList.Count;
+                {
+                    int count = currentBooking.GuestList.Count;
+                    mealCost = 15 * count;
+                }
+                    
                 else
                     mealCost = 0;
 
@@ -83,6 +90,10 @@ namespace Coursework_2
                 int hireLength = (currentBooking.HireEnd - currentBooking.HireStart).Days;
                 hireCost = 50 * hireLength;
 
+                costLabel.Content += "Cost for Night's stayed: £" + nightsCost + "\n";
+                costLabel.Content += "Breakfasts: £" + breakfastCost + "\n";
+                costLabel.Content += "Evening Meals: £" + mealCost + "\n";
+                costLabel.Content += "Car hire for " + hireLength + " days: £" + hireCost + "\n";
 
             }
             else

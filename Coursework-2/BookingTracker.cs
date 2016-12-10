@@ -153,7 +153,6 @@ namespace Coursework_2
                     currentBooking.Diet = words[4]; //5th index is diet requirements
 
                     currentBooking.Breakfast = Convert.ToBoolean(words[5]);
-                    MessageBox.Show(currentBooking.Breakfast.ToString());
 
                     currentBooking.Meals = Convert.ToBoolean(words[6]);
 
@@ -164,15 +163,9 @@ namespace Coursework_2
                     currentBooking.HireStart = Convert.ToDateTime(words[9]);
 
                     currentBooking.HireEnd = Convert.ToDateTime(words[10]);
+
                     
-                    //<identify bookings linked to customer>
-                    for (int i = 11; i < words.Length; i++)
-                    {
-                        MessageBox.Show(words[i]);
-                        Guest nextGuest = new Guest();          //pass in a guestNumber starting at 1
-                        currentBooking.AddToList(nextGuest);
-                    }
-                    //<identify bookings linked to this customer
+                    
 
                     break; //stop loop for efficiency after we've found what we need
                 }
@@ -224,7 +217,7 @@ namespace Coursework_2
                         else
                         {
                             lineEdit.WriteLine("Booking Ref: " + currentBooking.BookingRef + ", Customer: " + currentCustomer.CustomerRef + ", aDate: " + currentBooking.ArrivalDate + ", dDate: " + currentBooking.DepartureDate + ", " +
-                        currentBooking.Diet + ", " + currentBooking.Breakfast + ", " + currentBooking.Meals + ", " + currentBooking.CarHire + ", " + currentBooking.DriverName + ", " + currentBooking.HireStart + ", " + currentBooking.HireEnd + ", " + String.Join(", ", currentBooking.GuestList));
+                        currentBooking.Diet + ", " + currentBooking.Breakfast + ", " + currentBooking.Meals + ", " + currentBooking.CarHire + ", " + currentBooking.DriverName + ", " + currentBooking.HireStart + ", " + currentBooking.HireEnd);
                         }
                     }
 
@@ -261,7 +254,7 @@ namespace Coursework_2
                 {
                     foreach (string line in lines)                                               //for each line in the file do the following
                     {
-                        MessageBox.Show(booking.ToString());
+                        MessageBox.Show(booking.ToString() + " DELETED");
                         if (!line.Contains("Booking Ref: " + booking))
                         {
                             lineDelete.WriteLine(line);                                     //overwrite each line with itself

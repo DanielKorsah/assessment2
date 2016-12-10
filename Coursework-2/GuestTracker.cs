@@ -78,20 +78,20 @@ namespace Coursework_2
 
         }
 
-        public void Delete(Booking currentBooking, string passNum)
+        public void Delete(Booking currentBooking, ref string passNum)
         {
 
             bool match = false;                                                         //flag to allow checking if a match was found for associated customer ref
-            string updateLine = "";
-            path = dm.GetPath() + "Guests.txt";                              //select correct file location to read
+            path = dm.GetPath() + "Guests.txt";                                         //select correct file location to read
 
+            //read all lines in the file into an array of files
             string[] lines = File.ReadAllLines(path);
 
-            foreach (string line in lines)                                               //for each line in the file do the following
+            //on each line check each line, if booking ref number and it contains the passport number to be deleted, set flag to show match found
+            foreach (string line in lines)                                               
             {
                 if (line.Contains("Booking: " + currentBooking.BookingRef) && line.Contains(passNum))
-                {
-                    updateLine = line;                                              //take line to be maipulated
+                {                                            
                     match = true;
                     break;
                 }
@@ -105,7 +105,7 @@ namespace Coursework_2
             {
                 using (StreamWriter lineDelete = new StreamWriter(path))
                 {
-                    foreach (string line in lines)                                               //for each line in the file do the following
+                    foreach (string line in lines)                                          //for each line in the file do the following
                     {
                         if (!line.Contains(passNum))
                         {
